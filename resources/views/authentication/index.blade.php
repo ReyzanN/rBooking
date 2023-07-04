@@ -3,8 +3,8 @@
 @section('title','Création de compte')
 
 @section('content')
-    <div class="container mt-3 d-flex justify-content-center align-items-center">
-        <div class="card" style="width: 35rem;">
+    <div class="container mt-3 d-flex justify-content-center align-items-center flex-column">
+        <div class="card RegisterCard">
             <div class="d-flex justify-content-center align-items-center">
                 <i class="bi bi-person-add" style="font-size: 5rem"></i>
                 <h1>Création de Compte</h1>
@@ -60,6 +60,10 @@
                     </div>
                 </form>
             </div>
+        </div>
+
+        <div class="mt-3">
+            <a href="{{ route('auth.login') }}">J'ai déjà un compte</a>
         </div>
     </div>
 @endsection

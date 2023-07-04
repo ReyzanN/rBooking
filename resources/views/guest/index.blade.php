@@ -1,6 +1,6 @@
 @extends('layouts.app.guest.layouts')
 
-@section('title','Bonjour !')
+@section('title','Système de réservation')
 
 @section('content')
     <div class="container mt-3">
@@ -33,7 +33,7 @@
                 <div class="col-6 d-flex justify-content-center align-items-center flex-column">
                     <i class="bi bi-person-check" style="font-size: 3rem"></i>
                     <p class="text-center">J'ai un compte</p>
-                    <button class="btn btn-success rounded-2">Me connecter</button>
+                    <a href="{{ route('auth.login') }}"><button class="btn btn-success rounded-2">Me connecter</button></a>
                 </div>
             </div>
         </div>

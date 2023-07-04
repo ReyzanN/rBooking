@@ -6,3 +6,15 @@ Fonts
     font-family: 'Roboto', sans-serif;
 }
 
+/*
+Register Page
+*/
+.registerCard {
+    width: 35rem;
+}
+
+@media screen and (max-width: 480px) {
+    .registerCard {
+        width: 23rem;
+    }
+}

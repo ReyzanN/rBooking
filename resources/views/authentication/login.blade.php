@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container mt-3 d-flex justify-content-center align-items-center">
-        <div class="card" style="width: 35rem;">
+        <div class="card registerCard">
             <div class="d-flex justify-content-center align-items-center">
                 <i class="bi bi-person-add" style="font-size: 5rem"></i>
                 <h1>Se Connecter</h1>
