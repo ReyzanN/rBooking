@@ -33,9 +33,15 @@ Route::get('/app/logout', [AuthentificationController::class, 'LogOut'])->name('
  * Customer Dashboard
 */
 Route::middleware(['auth'])->group(function (){
-    Route::get('/app/dashboard', function(){
-        dd('tkt');
-    })->name('customer.dashboard');
+    /*
+     * Dashboard
+     */
+    Route::get('/app/dashboard', \App\Http\Controllers\DashboardCustomersController::class)->name('customer.dashboard');
+    /*
+     * Customer Settings
+    */
+    Route::get('/app/customers/settings', [\App\Http\Controllers\CustomersController::class, 'AccountSettingsView'])->name('customers.settings');
+
 });
 
 
