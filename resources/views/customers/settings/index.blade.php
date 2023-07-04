@@ -56,7 +56,7 @@
                     </ul>
                 </div>
                 <div class="col d-flex justify-content-center align-items-center">
-                    <button class="btn btn-outline-warning rounded-4 fw-bold">Modifier mon mot de passe</button>
+                    <button class="btn btn-outline-warning rounded-4 fw-bold" data-bs-toggle="modal" data-bs-target="#PasswordUpdate">Modifier mon mot de passe</button>
                 </div>
             </div>
         </div>
@@ -124,6 +124,47 @@
 
                                 <div class="row mt-2 d-flex justify-content-center align-items-center">
                                     <button class="btn btn-success w-75">Modifier mes informations</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Security -->
+            <div class="modal modal-lg fade" id="PasswordUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="PasswordUpdateLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="PasswordUpdateLabel">Modifier Mon Mot De Passe</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('customers.settings.update.password') }}" method="post">
+                                @csrf
+                                <div class="row mt-2">
+                                    <div class="col-12">
+                                        <div class="form-floating mb-3">
+                                            <input type="password" name="password" class="form-control" id="password" placeholder="Martin">
+                                            <label for="password">Mot De Passe</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-2">
+                                    <div class="col-12">
+                                        <div class="form-floating mb-3">
+                                            <input type="password" name="password_confirm" class="form-control" id="password_confirm" placeholder="Martin">
+                                            <label for="password_confirm">Mot De Passe - Confirmation</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-2 d-flex justify-content-center align-items-center">
+                                    <button class="btn btn-success w-75">Modifier mon mot de passe</button>
                                 </div>
                             </form>
                         </div>

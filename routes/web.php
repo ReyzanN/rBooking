@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function (){
     */
     Route::get('/app/customers/settings', [CustomersController::class, 'AccountSettingsView'])->name('customers.settings');
     Route::post('/app/customers/settings/update/information', [CustomersController::class, 'UpdateAccountInformation'])->name('customers.settings.update.informations');
+    Route::post('/app/customers/settings/update/password', [CustomersController::class, 'UpdatePasswordAccount'])->name('customers.settings.update.password');
 
 });
 

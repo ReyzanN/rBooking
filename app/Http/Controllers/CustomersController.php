@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomersPasswordUpdateRequest;
 use App\Http\Requests\CustomersPersonalInformationsUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -34,5 +35,27 @@ class CustomersController extends Controller
             }
         }
         return redirect()->back();
+    }
+
+    public function UpdatePasswordAccount(CustomersPasswordUpdateRequest $request){
+        if ($request->validated()){
+            $NewPassword = $request->only('password');
+            $NewPasswordConfirm = $request->only('password_confirm');
+            if ($NewPassword['password'] === $NewPasswordConfirm['password_confirm']){
+                try {
+                    auth()->user()->update([
+                        'password' => bcrypt($NewPassword['password'])
+                    ]);
+                    Session::flash('Success', 'Modification réalisé avec succès, merci de vous reconnecter');
+                    auth()->logout();
+                    return \redirect()->route('auth.login');
+                }catch (\Exception $e){
+                    Session::flash('Failure','Une erreur est survenue');
+                }
+            }else {
+                Session::flash('Failure','Les deux mots de passe ne correspondent pas');
+            }
+            return redirect()->back();
+        }
     }
 }

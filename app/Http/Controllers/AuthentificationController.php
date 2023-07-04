@@ -49,6 +49,7 @@ class AuthentificationController extends Controller
     public function LoginAttempt(LoginRequest $request){
         if ($request->validated()){
             if (auth()->attempt($request->only('email','password'))){
+                auth()->user()->UpdateLastConnection();
                 return redirect()->route('customer.dashboard');
             }
             Session::flash('Failure','Combinaison mot de passe / email inconnue');
