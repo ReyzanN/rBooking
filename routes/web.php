@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthentificationController;
+use App\Http\Controllers\GuestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,3 +14,31 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+/*
+ * Guest
+*/
+Route::get('/',GuestController::class)->name('app.guest');
+
+/*
+ * Authentification
+*/
+Route::get('/app/register', AuthentificationController::class)->name('auth.register');
+Route::post('/app/register', [AuthentificationController::class, 'Register'])->name('auth.register.confirm');
+Route::get('/app/login', [AuthentificationController::class, 'Login'])->name('auth.login');
+Route::post('/app/login', [AuthentificationController::class, 'LoginAttempt'])->name('auth.login.confirm');
+Route::get('/app/logout', [AuthentificationController::class, 'LogOut'])->name('auth.logout');
+
+/*
+ * Customer Dashboard
+*/
+Route::middleware(['auth'])->group(function (){
+    Route::get('/app/dashboard', function(){
+        dd('tkt');
+    })->name('customer.dashboard');
+});
+
+
+/*
+ * Errors Route
+ */

@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -19,8 +19,15 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'surname',
         'email',
+        'phone',
         'password',
+        'rank',
+        'accountValidity',
+        'accountVerifiedAt',
+        'lastConnection',
+        'killSession',
     ];
 
     /**
@@ -39,7 +46,25 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'password' => 'hashed'
     ];
+
+    /*
+     * Functions
+     */
+
+    /**
+     * @name UpdateLastConnection
+     * @usage Update the last connection timestamp for user
+     * @return bool
+     */
+    public function UpdateLastConnection() : bool{
+        try {
+            $this->update(['lastConnection' => new \DateTime()]);
+            return true;
+        }catch (\Exception $e){
+            // Silence is golden
+        }
+        return false;
+    }
 }
