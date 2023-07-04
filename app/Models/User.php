@@ -67,4 +67,20 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    /**
+     * @name GetRankString
+     * @usage Get user rank's string
+     * @return string
+     */
+    public function GetRankString(): string
+    {
+        return match ($this->rank) {
+            0 => "Client",
+            1 => "Consultant",
+            2 => "Admin",
+            3 => "Super-Admin",
+            default => "Inconnu",
+        };
+    }
 }
