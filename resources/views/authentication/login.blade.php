@@ -1,4 +1,4 @@
-@extends('layouts.app.customers.layouts')
+@extends('layouts.app.guest.layouts')
 
 @section('title','Me connecter')
 

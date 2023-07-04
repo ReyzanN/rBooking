@@ -59,7 +59,6 @@ class AuthentificationController extends Controller
     public function LogOut(): \Illuminate\Http\RedirectResponse
     {
         if (auth()->user()){
-            Session::flash('Déconnexion réussie');
             auth()->logout();
         }
         return redirect()->route('auth.login');
