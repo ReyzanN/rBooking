@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthentificationController;
+use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\GuestController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +41,8 @@ Route::middleware(['auth'])->group(function (){
     /*
      * Customer Settings
     */
-    Route::get('/app/customers/settings', [\App\Http\Controllers\CustomersController::class, 'AccountSettingsView'])->name('customers.settings');
+    Route::get('/app/customers/settings', [CustomersController::class, 'AccountSettingsView'])->name('customers.settings');
+    Route::post('/app/customers/settings/update/information', [CustomersController::class, 'UpdateAccountInformation'])->name('customers.settings.update.informations');
 
 });
 
