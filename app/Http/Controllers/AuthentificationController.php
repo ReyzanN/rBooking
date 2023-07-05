@@ -48,11 +48,12 @@ class AuthentificationController extends Controller
 
     public function LoginAttempt(LoginRequest $request){
         if ($request->validated()){
-            if (auth()->attempt($request->only('email','password'))){
+            $Credentials = array_merge($request->only('email','password'),array('accountValidity' => 1));
+            if (auth()->attempt($Credentials)){
                 auth()->user()->UpdateLastConnection();
                 return redirect()->route('customer.dashboard');
             }
-            Session::flash('Failure','Combinaison mot de passe / email inconnue');
+            Session::flash('Failure','Combinaison mot de passe / email inconnue | Ou Votre compte est bloqué contactez votre administrateur');
             return redirect()->back();
         }
     }
