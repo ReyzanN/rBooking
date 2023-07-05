@@ -82,34 +82,30 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
-                            @csrf
-                            <input type="hidden" name="user" id="userInputRight" value="">
-                            <div class="mt-3 mb-3">
-                                <div class="alert alert-primary" role="alert">
-                                    Ancien rang : <span class="badge text-bg-light" id="RankSpan"></span>
+                        <div class="mt-3 mb-3">
+                            <div class="alert alert-primary" role="alert">
+                                Ancien rang : <span class="badge text-bg-light" id="RankSpan"></span>
+                            </div>
+                        </div>
+                        <div class="mt-3 mt-3">
+                            <hr>
+                        </div>
+                        <div class="mt-3 mb-3">
+                            <form action="{{ route('admin.members.update.rank') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="user" id="userInputRight" value="">
+                                <select class="form-select" aria-label="Selection du Rang" name="rank">
+                                    <option selected>Selection du nouveau Rang</option>
+                                    <option value="0">Client</option>
+                                    <option value="1">Consultant</option>
+                                    <option value="2">Admin</option>
+                                    <option value="3">Super-Admin</option>
+                                </select>
+                                <div class="mb-3 mt-3 d-flex justify-content-around align-items-center">
+                                    <button class="btn btn-success">Valider</button>
                                 </div>
-                            </div>
-                            <div class="mt-3 mt-3">
-                                <hr>
-                            </div>
-                            <div class="mt-3 mb-3">
-                                <form action="" method="post">
-                                    @csrf
-                                    <select class="form-select" aria-label="Selection du Rang">
-                                        <option selected>Selection du nouveau Rang</option>
-                                        <option value="0">Client</option>
-                                        <option value="1">Consultant</option>
-                                        <option value="2">Admin</option>
-                                        <option value="3">Super-Admin</option>
-                                    </select>
-                                    <div class="mb-3 mt-3 d-flex justify-content-around align-items-center">
-                                        <button class="btn btn-success">Valider</button>
-                                    </div>
-                                </form>
-
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#ViewUser">Annuler</button>

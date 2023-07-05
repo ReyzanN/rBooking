@@ -59,6 +59,8 @@ Route::middleware(['auth'])->group(function (){
          * Members
          */
         Route::get('/app/administration/members/view', [AdministrationController::class, 'ViewUsersList'])->name('admin.members.view');
+        Route::post('/app/administration/members/update/rank', [AdministrationController::class, 'UpdateUserRank'])->name('admin.members.update.rank');
+        Route::post('/app/administration/members/update/block', [AdministrationController::class, 'BlockUserAccount'])->name('admin.members.update.block');
 
 
         /*
