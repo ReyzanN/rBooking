@@ -2,9 +2,9 @@ function SearchAjax(Element,APIUrl,ResultDiv,XCSRFTOKEN){
     const XHR = new XMLHttpRequest()
     let Form = new FormData
     Form.append('data', Element)
-    XHR.onreadystatechange = function (){
+    let resultDiv = document.getElementById(ResultDiv)
+    XHR.onreadystatechange = async function (){
         if (XHR.DONE === XMLHttpRequest.DONE){
-            let resultDiv = document.getElementById(ResultDiv)
             resultDiv.innerHTML = XHR.responseText
         }
     }

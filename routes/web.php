@@ -60,6 +60,15 @@ Route::middleware(['auth'])->group(function (){
          */
         Route::get('/app/administration/members/view', [AdministrationController::class, 'ViewUsersList'])->name('admin.members.view');
 
+
+        /*
+         * Ajax Calls
+         */
+            /*
+             * Members View Ajax
+             */
+            Route::post('/app/administration/members/view/ajax', [AdministrationController::class, 'ViewUserAjaxForModal'])->name('admin.members.view.ajax');
+
     });
 
 });

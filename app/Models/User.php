@@ -132,4 +132,14 @@ class User extends Authenticatable
         if ($this->rank > 0) { return true; }
         return false;
     }
+
+    /**
+     * @date 05/07/2023
+     * @name GetValidityString
+     * @return string
+     */
+    public function GetValidityString(): string {
+        if ($this->accountValidity == 1) { return "Compte Valide"; }
+        return "Compte non valide";
+    }
 }

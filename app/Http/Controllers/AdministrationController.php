@@ -17,4 +17,19 @@ class AdministrationController extends Controller
         $UsersCount = count($Users);
         return view('admin.users.index', ['Users' => $Users,'UserCount' => $UsersCount]);
     }
+    
+
+    /*
+     * Ajax Functions
+     */
+
+    public function ViewUserAjaxForModal(Request $request){
+        if ($request->ajax()){
+            $User = User::find($request->only('data')['data']);
+            if (!$User){
+                return view('admin.users.error');
+            }
+            return view('admin.users.modalViewUser', ['User' => $User]);
+        }
+    }
 }
