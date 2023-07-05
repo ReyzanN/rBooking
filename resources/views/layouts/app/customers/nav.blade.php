@@ -29,7 +29,7 @@
                 <ul class="dropdown-menu dropdown-menu-lg-end">
                     <li><a class="dropdown-item" href="{{ route('customers.settings') }}"><i class="bi bi-gear"></i>&nbsp;Mon Compte</a></li>
                     @if(auth()->user()->HasRank())
-                    <li><a class="dropdown-item" href="{{ route('customers.settings') }}"><i class="bi bi-person-lock"></i>&nbsp;Panel Gestion</a></li>
+                    <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}"><i class="bi bi-person-lock"></i>&nbsp;Panel Gestion</a></li>
                     @endif
                     <li class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="{{ route('auth.logout') }}"><button class="btn btn-outline-danger">Déconnexion</button></a></li>
