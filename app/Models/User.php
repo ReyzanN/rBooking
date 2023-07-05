@@ -78,7 +78,7 @@ class User extends Authenticatable
      * @name IsSuperAdmin
      * @return bool
      */
-    public function IsSuerAdmin(): bool {
+    public function IsSuperAdmin(): bool {
         if ($this->rank == 3){
             return true;
         }
