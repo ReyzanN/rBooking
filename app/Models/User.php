@@ -54,6 +54,7 @@ class User extends Authenticatable
      */
 
     /**
+     * @date 04/07/2023
      * @name UpdateLastConnection
      * @usage Update the last connection timestamp for user
      * @return bool
@@ -69,6 +70,7 @@ class User extends Authenticatable
     }
 
     /**
+     * @date 04/07/2023
      * @name GetRankString
      * @usage Get user rank's string
      * @return string
@@ -82,5 +84,16 @@ class User extends Authenticatable
             3 => "Super-Admin",
             default => "Inconnu",
         };
+    }
+
+    /**
+     * @date 05/07/2023
+     * @usage Determine if user has right
+     * @name HasRank
+     * @return bool
+     */
+    public function HasRank(): bool{
+        if ($this->rank > 0) { return true; }
+        return false;
     }
 }
