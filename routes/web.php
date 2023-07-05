@@ -35,7 +35,7 @@ Route::get('/app/logout', [AuthentificationController::class, 'LogOut'])->name('
 /*
  * Customer Dashboard
 */
-Route::middleware(['auth'])->group(function (){
+Route::middleware(['auth','KillSession'])->group(function (){
     /*
      * Dashboard
      */
