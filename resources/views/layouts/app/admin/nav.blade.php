@@ -33,7 +33,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ route('admin.members.view') }}"><i class="bi bi-people"></i>&nbsp;Voir tout</a></li>
-                        <li><a class="dropdown-item" href="#">Accès compte suspendus</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.members.suspended.view') }}">Accès compte suspendus</a></li>
                     </ul>
                 </li>
             </ul>

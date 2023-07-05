@@ -17,12 +17,9 @@ class AdministrationController extends Controller
     }
 
     public function ViewUsersList(){
-        if (Gate::allows('UserAdmin')){
-            $Users = User::all();
-            $UsersCount = count($Users);
-            return view('admin.users.index', ['Users' => $Users,'UserCount' => $UsersCount]);
-        }
-        abort(404);
+        $Users = User::all();
+        $UsersCount = count($Users);
+        return view('admin.users.index', ['Users' => $Users,'UserCount' => $UsersCount]);
     }
 
     public function UpdateUserRank(UpdateUserRankRequest $request){
@@ -91,6 +88,12 @@ class AdministrationController extends Controller
             return redirect()->back();
         }
         abort(404);
+    }
+
+    public function ViewSuspendedUsersList(){
+        $User = User::where(['accountValidity' => 0])->get();
+        $Count = count($User);
+        return view('admin.users.suspended', ['Users' => $User,'Count' => $Count]);
     }
 
 
