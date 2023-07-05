@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdministrationController;
+use App\Http\Controllers\AppointmentTypeController;
 use App\Http\Controllers\AuthentificationController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\DashboardAdminController;
@@ -64,8 +65,9 @@ Route::middleware(['auth','KillSession'])->group(function (){
         Route::get('/app/administration/members/view/suspended', [AdministrationController::class, 'ViewSuspendedUsersList'])->name('admin.members.suspended.view');
         /*
          * Appointment Type
-         */
-
+        */
+        Route::get('/app/administration/appointment/type/view', AppointmentTypeController::class)->name('admin.appointment.type.view');
+        Route::post('/app/administration/appointment/type/add', [AppointmentTypeController::class, 'AddAppointmentType'])->name('admin.appointment.type.add');
 
 
         /*

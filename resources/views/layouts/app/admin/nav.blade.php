@@ -16,16 +16,7 @@
                     <a class="nav-link active" href="#">Rendez-vous | Voir tout</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Gestion Type Rendez-vous</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Accès par type
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                    </ul>
+                    <a class="nav-link active" href="{{ route('admin.appointment.type.view') }}">Gestion Type Rendez-vous</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

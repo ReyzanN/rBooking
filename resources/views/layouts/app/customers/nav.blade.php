@@ -12,14 +12,8 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="#">Mes rendez-vous</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Prendre rendez-vous
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Prendre Rendez-vous</a>
                 </li>
             </ul>
             <div class="btn-group">

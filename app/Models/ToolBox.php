@@ -13,9 +13,9 @@ trait ToolBox
     public function ParseDateToString(\DateTime|string $dateTime):string {
         if (is_string($dateTime)){
             $Date = new \DateTime($dateTime);
-            return $Date->format('yd/m/y H:i');
+            return $Date->format('d/m/y H:i');
         }else {
-            return $dateTime->format('yd/m/y H:i');
+            return $dateTime->format('d/m/y H:i');
         }
     }
 }
