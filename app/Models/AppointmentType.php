@@ -46,12 +46,26 @@ class AppointmentType extends Model
      * Functions
      */
 
+    /**
+     * @date 05/07/2023
+     * @return string
+     */
     public function GetStatusString(){
         if ($this->active) {
             return 'Actif';
         }
         return 'Non actif';
     }
+
+    /**
+     * @date 05/07/2023
+     * @usage Get Active Type for Client display
+     * @return mixed
+     */
+    public static function GetActive(){
+        return AppointmentType::where(['active' => 1])->get();
+    }
+
 
 
 
