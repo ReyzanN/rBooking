@@ -46,7 +46,7 @@ class AuthServiceProvider extends ServiceProvider
          * User
          */
         Gate::define('UserSuperAdmin', function(){
-            if (auth()->user()->IsSuerAdmin()){
+            if (auth()->user()->IsSuperAdmin()){
                 return true;
             }
            return false;
