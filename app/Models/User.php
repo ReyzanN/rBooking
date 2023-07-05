@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, ToolBox;
 
     /**
      * The attributes that are mass assignable.
@@ -48,6 +48,42 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed'
     ];
+
+    /*
+     * Rank Check Functions
+     */
+
+    /**
+     * @date 05/07/2023
+     * @name IsConsultant
+     * @return bool
+     */
+    public function IsConsultant(): bool{
+        if ($this->rank >= 1){ return true; }
+        return false;
+    }
+
+    /**
+     * @date 05/07/2023
+     * @name IsAdmin
+     * @return bool
+     */
+    public function IsAdmin(): bool {
+        if ($this->rank >= 2) { return true; }
+        return false;
+    }
+
+    /**
+     * @date 05/07/2023
+     * @name IsSuperAdmin
+     * @return bool
+     */
+    public function IsSuerAdmin(): bool {
+        if ($this->rank == 3){
+            return true;
+        }
+        return false;
+    }
 
     /*
      * Functions
