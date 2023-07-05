@@ -75,8 +75,3 @@ Route::middleware(['auth'])->group(function (){
     });
 
 });
-
-
-/*
- * Errors Route
- */
