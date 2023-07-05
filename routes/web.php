@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdministrationController;
 use App\Http\Controllers\AuthentificationController;
 use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\GuestController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +46,21 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/app/customers/settings', [CustomersController::class, 'AccountSettingsView'])->name('customers.settings');
     Route::post('/app/customers/settings/update/information', [CustomersController::class, 'UpdateAccountInformation'])->name('customers.settings.update.informations');
     Route::post('/app/customers/settings/update/password', [CustomersController::class, 'UpdatePasswordAccount'])->name('customers.settings.update.password');
+
+    /*
+     * Administration Route
+     */
+    Route::middleware(['AdministrationMember'])->group(function(){
+        /*
+         * Dashboard
+         */
+        Route::get('/app/administration/dashboard', DashboardAdminController::class)->name('admin.dashboard');
+        /*
+         * Members
+         */
+        Route::get('/app/administration/members/view', [AdministrationController::class, 'ViewUsersList'])->name('admin.members.view');
+
+    });
 
 });
 
