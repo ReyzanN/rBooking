@@ -61,18 +61,20 @@
             <label for="lastConnection">Dernière connexion</label>
         </div>
     </div>
-    <div class="col-6 d-flex justify-content-around align-items-center">
-        <form action="{{ route('admin.members.update.block') }}" method="post">
-            @csrf
-            <input type="hidden" value="{{ $User->id }}" name="user">
-            <input type="hidden" value="{{ $User->accountValidity }}" name="block">
-            @if($User->accountValidity)
-            <button class="btn btn-outline-danger" type="submit"><i class="bi bi-person-lock"></i></button>
-            @else
-            <button class="btn btn-outline-success" type="submit"><i class="bi bi-person-check"></i></button>
-            @endif
-        </form>
-        <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#UpdateRight" data-bs-user="{{ $User->id }}" data-bs-right="{{ $User->GetRankString() }}"><i class="bi bi-person-gear"></i></button>
-        <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
-    </div>
+    @if(auth()->user()->IsSuperAdmin())
+        <div class="col-6 d-flex justify-content-around align-items-center">
+            <form action="{{ route('admin.members.update.block') }}" method="post">
+                @csrf
+                <input type="hidden" value="{{ $User->id }}" name="user">
+                <input type="hidden" value="{{ $User->accountValidity }}" name="block">
+                @if($User->accountValidity)
+                <button class="btn btn-outline-danger" type="submit"><i class="bi bi-person-lock"></i></button>
+                @else
+                <button class="btn btn-outline-success" type="submit"><i class="bi bi-person-check"></i></button>
+                @endif
+            </form>
+            <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#UpdateRight" data-bs-user="{{ $User->id }}" data-bs-right="{{ $User->GetRankString() }}"><i class="bi bi-person-gear"></i></button>
+            <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+        </div>
+    @endif
 </div>

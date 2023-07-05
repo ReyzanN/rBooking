@@ -42,7 +42,7 @@ class AuthentificationController extends Controller
 
     public function Login(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        if (auth()->user()) { return redirect()->route('app.guest'); }
+        if (auth()->user()) { return redirect()->route('customer.dashboard'); }
         return view('authentication.login');
     }
 
