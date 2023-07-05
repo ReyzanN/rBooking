@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdministrationController;
 use App\Http\Controllers\AppointmentTypeController;
 use App\Http\Controllers\AuthentificationController;
+use App\Http\Controllers\ClientAppointmentController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\GuestController;
@@ -47,6 +48,11 @@ Route::middleware(['auth','KillSession'])->group(function (){
     Route::get('/app/customers/settings', [CustomersController::class, 'AccountSettingsView'])->name('customers.settings');
     Route::post('/app/customers/settings/update/information', [CustomersController::class, 'UpdateAccountInformation'])->name('customers.settings.update.informations');
     Route::post('/app/customers/settings/update/password', [CustomersController::class, 'UpdatePasswordAccount'])->name('customers.settings.update.password');
+
+    /*
+     * Appointment
+     */
+    Route::get('/app/customers/appointment/view/type', ClientAppointmentController::class)->name('customers.appointment.type.view');
 
     /*
      * Administration Route
