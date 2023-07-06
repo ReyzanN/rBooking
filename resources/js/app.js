@@ -1,6 +1,7 @@
 import './bootstrap';
 import $ from "jquery";
 import 'datatables.net'
+import L from 'leaflet';
 
 /*
 DataTables Definitions

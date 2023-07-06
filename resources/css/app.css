@@ -5,6 +5,10 @@ Fonts
 .robotoR400 {
     font-family: 'Roboto', sans-serif;
 }
+/*
+Maps
+*/
+#map { height: 230px; }
 
 /*
 Register Page

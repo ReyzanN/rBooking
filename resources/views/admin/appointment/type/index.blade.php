@@ -37,7 +37,7 @@
                         <h5 class="card-title">{{ $AT->name }}</h5>
                         <p class="card-text">{{ $AT->description }}</p>
                         <div class="d-flex justify-content-center align-items-center flex-column">
-                            <button class="btn btn-outline-primary mt-2 mb-2"><i class="bi bi-cursor"></i>&nbsp;Selectioner ce type</button>
+                            <a href="{{ route('admin.appointment.type.view.target', $AT->id) }}"><button class="btn btn-outline-primary mt-2 mb-2"><i class="bi bi-cursor"></i>&nbsp;Selectioner ce type</button></a>
                             <button class="btn btn-outline-danger mt-2 mb-2"><i class="bi bi-trash"></i>&nbsp;Supprimer ce type</button>
                         </div>
                     </div>

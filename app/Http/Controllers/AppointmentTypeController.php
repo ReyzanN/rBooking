@@ -35,4 +35,13 @@ class AppointmentTypeController extends Controller
         }
         return redirect()->back();
     }
+
+    public function ViewAppointmentType(int $AppointmentType){
+        $AppointmentTypeSearch = AppointmentType::find($AppointmentType);
+        if (!$AppointmentTypeSearch) {
+            Session::flash('Failure', 'Ce type de rendez-vous n\'existe pas');
+            return redirect()->back();
+        }
+        return view('admin.appointment.type.viewType', ['AppointmentType' => $AppointmentTypeSearch]);
+    }
 }
