@@ -23,7 +23,8 @@ class AppointmentType extends Model
         'street',
         'streetNumber',
         'zipCode',
-        'active'
+        'active',
+        'jsonCoordinatesInformations'
     ];
 
     /**

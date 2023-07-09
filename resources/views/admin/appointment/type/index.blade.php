@@ -29,7 +29,7 @@
         </div>
         <div class="row mt-3 mb-3 col">
             @foreach($AppointmentType as $AT)
-                <div class="card text-center">
+                <div class="card text-center mt-2 mb-2">
                     <div class="card-header">
                         #{{ $AT->id }} - {{ $AT->GetStatusString() }}
                     </div>

@@ -31,6 +31,7 @@
         </div>
         <div class="row mt-2">
             <div class="col">
+                <input type="hidden" name="mapCoords" id="mapCoords" value="{{ $AppointmentType->jsonCoordinatesInformations }}">
                 <div class="row">
                     <div id="map" class="rounded-3"></div>
                 </div>
