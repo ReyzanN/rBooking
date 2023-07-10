@@ -67,6 +67,7 @@
                                             <button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
                                             <button type="button" class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
                                             <button type="button" class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#RegisterUserForAppointment" data-bs-idAppointment="{{ $Appointment->id }}"><i class="bi bi-person-add"></i></button>
+                                            <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
                                         </div>
                                         <small class="text-body-secondary">Place disponibles : {{ $Appointment->GetRemainingPlace() }} / {{ $Appointment->place }}</small>
                                     </div>
@@ -87,6 +88,7 @@
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
                                             <button type="button" class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
+                                            <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
                                         </div>
                                         <small class="text-body-secondary">Place disponibles : {{ $Appointment->GetRemainingPlace() }} / {{ $Appointment->place }}</small>
                                     </div>

@@ -47,6 +47,11 @@ class Appointment extends Model
         return $this->hasOne(AppointmentType::class, 'id','idAppointmentType')->get()->first();
     }
 
+    public function GetAppointmentRegistration(): \Illuminate\Database\Eloquent\Collection
+    {
+        return $this->hasMany(AppointmentRegistration::class,'idAppointment','id')->get();
+    }
+
 
     /*
      * Functions
@@ -59,5 +64,31 @@ class Appointment extends Model
      */
     public function GetRemainingPlace(): int{
         return ($this->place - count(AppointmentRegistration::where(['idAppointment' => $this->id])->where('confirmed', '<>', '3')->get()));
+    }
+
+
+    /**
+     * @usage Update at full if no place left
+     * @return void
+     */
+    public function UpdateRegistration(): void
+    {
+        $Registration = count($this->GetAppointmentRegistration());
+        if ($Registration == $this->place){
+            $this->update(['complete' => 1]);
+        }
+    }
+
+    /**
+     * @usage Check if appointment is full before new registration
+     * @return bool
+     */
+    public function IsFull(): bool
+    {
+        $Registration = count($this->GetAppointmentRegistration());
+        if ($Registration >= $this->place){
+            return true;
+        }
+        return false;
     }
 }
