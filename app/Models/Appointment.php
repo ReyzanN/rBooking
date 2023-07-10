@@ -42,9 +42,9 @@ class Appointment extends Model
     /*
      * References
      */
-    public function GetAppointmentType(): void
+    public function GetAppointmentType()
     {
-        $this->hasOne(AppointmentType::class, 'id','idAppointmentType');
+        return $this->hasOne(AppointmentType::class, 'id','idAppointmentType')->get()->first();
     }
 
 

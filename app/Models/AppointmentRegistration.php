@@ -42,14 +42,14 @@ class AppointmentRegistration extends Model
     /*
      * References
      */
-    public function GetAppointment(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function GetAppointment()
     {
-        return $this->hasOne(Appointment::class,'id','idAppointment');
+        return $this->hasOne(Appointment::class,'id','idAppointment')->get()->first();
     }
 
-    public function GetUser(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function GetUser()
     {
-        return $this->hasOne(User::class, 'id','idUser');
+        return $this->hasOne(User::class, 'id','idUser')->get()->first();
     }
 
     /*

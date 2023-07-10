@@ -37,9 +37,9 @@ trait ToolBox
         );
         if (is_string($dateTime)){
             $Date = new \DateTime($dateTime);
-            return $Day[$Date->format('w')].' '.$Date->format('d').' '.$Month[$Date->format('M')].' '.$Date->format('Y');
+            return $Day[$Date->format('w')].' '.$Date->format('d').' '.$Month[$Date->format('M')].' '.$Date->format('Y').' - '.$Date->format('H').' H '.$Date->format('i');
         }else {
-            return $Day[$dateTime->format('w')].' '.$dateTime->format('d').' '.$Month[$dateTime->format('M')].' '.$dateTime->format('Y');
+            return $Day[$dateTime->format('w')].' '.$dateTime->format('d').' '.$Month[$dateTime->format('M')].' '.$dateTime->format('Y').' - '.$dateTime->format('H').' H '.$dateTime->format('i');
         }
     }
 }
