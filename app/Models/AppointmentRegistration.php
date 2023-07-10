@@ -9,7 +9,7 @@ class AppointmentRegistration extends Model
 {
     use HasFactory, ToolBox;
 
-    protected $table = "appointment";
+    protected $table = "appointment_registration";
 
     /**
      * The attributes that are mass assignable.

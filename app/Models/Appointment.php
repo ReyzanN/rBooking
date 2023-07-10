@@ -51,4 +51,13 @@ class Appointment extends Model
     /*
      * Functions
      */
+
+    /**
+     * @date 10/07/2023
+     * @usage Return count of remaining place for appointment
+     * @return int
+     */
+    public function GetRemainingPlace(): int{
+        return ($this->place - count(AppointmentRegistration::where(['idAppointment' => $this->id])->where('confirmed', '<>', '3')->get()));
+    }
 }

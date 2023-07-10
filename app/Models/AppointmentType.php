@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class AppointmentType extends Model
 {
@@ -65,6 +66,25 @@ class AppointmentType extends Model
      */
     public static function GetActive(){
         return AppointmentType::where(['active' => 1])->get();
+    }
+
+    /**
+     * @date 10/07/2023
+     * @usage Get Available appointment for display
+     * @return collection
+     */
+    public function GetAvailableAppointment(): collection
+    {
+        return Appointment::where(['idAppointmentType' => $this->id, 'complete' => 0])->get();
+    }
+
+    /**
+     * @date 10/07/2023
+     * @usage Get Non Available appointment for display
+     * @return collection
+     */
+    public function GetNonAvailableAppointment(){
+        return Appointment::where(['idAppointmentType' => $this->id, 'complete' => 1])->get();
     }
 
 

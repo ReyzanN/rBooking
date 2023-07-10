@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idAppointment');
             $table->unsignedBigInteger('idUser');
             $table->boolean('confirmed')->default(0);
-            $table->dateTime('confirmed_at')->default(null);
+            $table->dateTime('confirmed_at')->nullable(true);
             $table->timestamps();
             $table->foreign('idAppointment')->on('appointment')->references('id');
             $table->foreign('idUser')->on('users')->references('id');

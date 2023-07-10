@@ -18,7 +18,7 @@
                 <h4 class="bg-body-tertiary"><i class="bi bi-hash"></i>&nbsp;Type de rendez-vous : {{ $AppointmentType->name }}</h4>
                 <div><span class="badge text-bg-light">Total de rendez-vous : 12</span></div>
                 <div class="mt-2">
-                    <button class="btn btn-outline-success mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#AddTypeModal"><i class="bi bi-bookmark-plus"></i>&nbsp;Ajouter un créneau de rendez-vous</button>
+                    <button class="btn btn-outline-success mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#AddAppointment"><i class="bi bi-bookmark-plus"></i>&nbsp;Ajouter un créneau de rendez-vous</button>
                     <button class="btn btn-outline-warning mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#updateType"><i class="bi bi-pencil-square"></i>&nbsp;Modifier le type</button>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
@@ -50,46 +50,50 @@
         </div>
         <div class="row mt-2">
             <div class="row mt-3">
-                <h5 class="bg-body-tertiary rounded-3 text-center"><i class="bi bi-calendar-check"></i>&nbsp;Liste des rendez-vous</h5>
+                <h5 class="bg-body-tertiary rounded-3 text-center"><i class="bi bi-calendar-check"></i>&nbsp;Liste des rendez-vous disponibles</h5>
             </div>
             <div class="col">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <div class="card-img-top d-flex justify-content-center align-items-center">
-                                <i class="bi bi-calendar-x" style="font-size: 2rem"></i>&nbsp;<span class="badge rounded-pill text-bg-danger">Non disponible</span>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text"><i class="bi bi-calendar2-week"></i>&nbsp; Rendez-vous le : <b>Lundi 11 Janvier 2024 à 11 H 30</b></p>
-                                <p class="card-text"></p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                                        <button type="button" class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
+                    @foreach($AppointmentType->GetAvailableAppointment() as $Appointment)
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <div class="card-img-top d-flex justify-content-center align-items-center">
+                                    <i class="bi bi-calendar-check" style="font-size: 2rem"></i>&nbsp;<span class="badge rounded-pill text-bg-success">Disponible</span>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text"><i class="bi bi-calendar2-week"></i>&nbsp; Rendez-vous le : <b>{{ $Appointment->ParseDateForAppointment($Appointment->date) }}</b></p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                            <button type="button" class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
+                                            <button type="button" class="btn btn-sm btn-outline-success"><i class="bi bi-person-add"></i></button>
+                                        </div>
+                                        <small class="text-body-secondary">Place disponibles : {{ $Appointment->GetRemainingPlace() }} / {{ $Appointment->place }}</small>
                                     </div>
-                                    <small class="text-body-secondary">Place disponibles : 0 / 1</small>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <div class="card-img-top d-flex justify-content-center align-items-center">
-                                <i class="bi bi-calendar-check" style="font-size: 2rem"></i>&nbsp;<span class="badge rounded-pill text-bg-success">Disponible</span>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text"><i class="bi bi-calendar2-week"></i>&nbsp; Rendez-vous le : <b>Lundi 11 Janvier 2024 à 11 H 30</b></p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                                        <button type="button" class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
-                                        <button type="button" class="btn btn-sm btn-outline-success"><i class="bi bi-person-add"></i></button>
+                    @endforeach
+                    @foreach($AppointmentType->GetNonAvailableAppointment() as $Appointment)
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <div class="card-img-top d-flex justify-content-center align-items-center">
+                                    <i class="bi bi-calendar-x" style="font-size: 2rem"></i>&nbsp;<span class="badge rounded-pill text-bg-danger">Non disponible</span>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text"><i class="bi bi-calendar2-week"></i>&nbsp; Rendez-vous le : <b>{{ $Appointment->ParseDateForAppointment($Appointment->date) }}</b></p>
+                                    <p class="card-text"></p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                            <button type="button" class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
+                                        </div>
+                                        <small class="text-body-secondary">Place disponibles : {{ $Appointment->GetRemainingPlace() }} / {{ $Appointment->place }}</small>
                                     </div>
-                                    <small class="text-body-secondary">Place disponibles : 1 / 1</small>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -170,6 +174,49 @@
                         <div class="row mt-2 mb-2">
                             <div class="d-flex justify-content-center align-items-center">
                                 <button class="btn btn-outline-warning">Modifier</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Add Appointment -->
+    <div class="modal modal-lg fade" id="AddAppointment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="AddAppointmentLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="AddAppointmentLabel">Ajouter un rendez-vous</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('admin.appointment.add') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="idAppointmentType" id="idAppointmentType" value="{{ $AppointmentType->id }}">
+                        <div class="row mt-2 mb-2">
+                            <p class="bg-body-tertiary"><i class="bi bi-tag"></i>&nbsp;Identification</p>
+                        </div>
+                        <div class="row mt-2 mb-2">
+                            <div class="col-6">
+                                <div class="form-floating mb-3">
+                                    <input type="datetime-local" class="form-control" id="date" name="date" value="{{ request()->old('date') }}" required>
+                                    <label for="date">Date & Heure</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control" id="place" name="place" value="{{ request()->old('place') }}" required>
+                                    <label for="place">Nombre de places</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2 mb-2">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <button class="btn btn-outline-success">Ajouter</button>
                             </div>
                         </div>
                     </form>

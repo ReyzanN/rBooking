@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdministrationController;
+use App\Http\Controllers\AppointmentsAdministrationController;
 use App\Http\Controllers\AppointmentTypeController;
 use App\Http\Controllers\AuthentificationController;
 use App\Http\Controllers\ClientAppointmentController;
@@ -76,6 +77,10 @@ Route::middleware(['auth','KillSession'])->group(function (){
         Route::post('/app/administration/appointment/type/add', [AppointmentTypeController::class, 'AddAppointmentType'])->name('admin.appointment.type.add');
         Route::get('/app/administration/appointment/type/view/{IdAppointmentType}', [AppointmentTypeController::class, 'ViewAppointmentType'])->name('admin.appointment.type.view.target');
         Route::post('/app/administration/appointment/type/update', [AppointmentTypeController::class, 'UpdateAppointmentType'])->name('admin.appointment.type.update');
+        /*
+         * Appointment
+         */
+        Route::post('/app/administration/appointment/add', [AppointmentsAdministrationController::class, 'AddAppointment'])->name('admin.appointment.add');
 
 
         /*
