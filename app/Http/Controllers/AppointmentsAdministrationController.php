@@ -61,16 +61,4 @@ class AppointmentsAdministrationController extends Controller
             }
         }
     }
-
-    public function test(){
-        $AppointmentRegistration = AppointmentRegistration::find(1)->first();
-        $Location = $AppointmentRegistration->GetAppointment()->GetAppointmentType()->streetNumber.' '.$AppointmentRegistration->GetAppointment()->GetAppointmentType()->street.' '.$AppointmentRegistration->GetAppointment()->GetAppointmentType()->zipCode.' '.$AppointmentRegistration->GetAppointment()->GetAppointmentType()->location;
-        Mail::to(auth()->user())->send(new ConfirmRegistrationMail($AppointmentRegistration,$Location));
-    }
-
-    public function preview(){
-        $AppointmentRegistration = AppointmentRegistration::find(1)->first();
-        $Location = $AppointmentRegistration->GetAppointment()->GetAppointmentType()->streetNumber.' '.$AppointmentRegistration->GetAppointment()->GetAppointmentType()->street.' '.$AppointmentRegistration->GetAppointment()->GetAppointmentType()->zipCode.' '.$AppointmentRegistration->GetAppointment()->GetAppointmentType()->location;
-        return view('emails.registration.confirmRegistration',['AppointmentRegistration' => AppointmentRegistration::find(1)->first(),'LocationComplete' => $Location]);
-    }
 }

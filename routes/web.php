@@ -85,13 +85,6 @@ Route::middleware(['auth','KillSession'])->group(function (){
 
 
         /*
-         * TEST ROUTE
-         */
-        Route::get('/app/administration/appointment/sendMail', [AppointmentsAdministrationController::class, 'test'])->name('admin.appointment.test');
-        Route::get('/app/administration/appointment/preview', [AppointmentsAdministrationController::class, 'preview'])->name('admin.appointment.preview');
-
-
-        /*
          * Ajax Calls
          */
             /*
