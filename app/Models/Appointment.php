@@ -74,8 +74,10 @@ class Appointment extends Model
     public function UpdateRegistration(): void
     {
         $Registration = count($this->GetAppointmentRegistration());
-        if ($Registration == $this->place){
-            $this->update(['complete' => 1]);
+        if ($Registration >= $this->place){
+            $this->update(['complete' => 1,'place' => $Registration]);
+        }else{
+            $this->update(['complete' => 0]);
         }
     }
 

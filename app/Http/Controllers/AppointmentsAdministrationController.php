@@ -85,6 +85,7 @@ class AppointmentsAdministrationController extends Controller
                 if ($Appointment){
                     try {
                         $Appointment->update($request->only('date','place'));
+                        $Appointment->UpdateRegistration();
                         Session::flash('Success','Modification réalisée avec succès');
                     }catch (\Exception $e){
                         Session::flash('Failure','Une erreur est survenue');
