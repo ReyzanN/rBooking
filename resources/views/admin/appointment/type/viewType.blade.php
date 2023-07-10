@@ -66,7 +66,7 @@
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
                                             <button type="button" class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
-                                            <button type="button" class="btn btn-sm btn-outline-success"><i class="bi bi-person-add"></i></button>
+                                            <button type="button" class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#RegisterUserForAppointment" data-bs-idAppointment="{{ $Appointment->id }}"><i class="bi bi-person-add"></i></button>
                                         </div>
                                         <small class="text-body-secondary">Place disponibles : {{ $Appointment->GetRemainingPlace() }} / {{ $Appointment->place }}</small>
                                     </div>
@@ -227,7 +227,48 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal User -->
+    <div class="modal fade" id="RegisterUserForAppointment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="RegisterUserForAppointmentLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="RegisterUserForAppointmentLabel">Inscrire un client</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('admin.appointment.force.register.user') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="idAppointment" id="idAppointment" value="">
+                        <select class="form-select" aria-label="Inscrire un utilisateur" name="idUser">
+                            <option selected>Selection de l'utilisateur</option>
+                            @foreach($Users as $User)
+                                <option value="{{$User->id}}">#{{ $User->id }} - {{ $User->surname }} {{ $User->name }}</option>
+                            @endforeach
+                        </select>
+                        <div class="mt-2 mb-2">
+                            <button class="btn btn-success" type="submit">Valider</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
+   <script>
+       let ModalUser = document.getElementById('RegisterUserForAppointment')
+       if (ModalUser){
+           ModalUser.addEventListener('show.bs.modal', event => {
+               const ButtonModal = event.relatedTarget
+               const IdAppointment = ButtonModal.getAttribute('data-bs-idAppointment')
+               const InputValue = document.getElementById('idAppointment')
+               InputValue.value = IdAppointment
+           })
+       }
+   </script>
 @endsection

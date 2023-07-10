@@ -20,7 +20,9 @@ class AppointmentRegistration extends Model
         'idAppointment',
         'idUser',
         'confirmed',
-        'confirmed_at'
+        'confirmed_at',
+        'confirmToken',
+        'active'
     ];
 
     /**
@@ -29,6 +31,7 @@ class AppointmentRegistration extends Model
      * @var array<int, string>
      */
     protected $hidden = [
+        'confirmToken'
     ];
 
     /**
@@ -55,4 +58,17 @@ class AppointmentRegistration extends Model
     /*
      * Functions
      */
+
+    /**
+     * @usage Check If user can register
+     * @param User $user
+     * @return bool
+     */
+    public static function AppointmentRegistrationAlreadyExistForUser($IdAppointment,$IdUser): bool{
+        $Count = count(AppointmentRegistration::where(['idUser' => $IdUser,'idAppointment' => $IdAppointment])->get());
+        if ($Count > 0){
+            return true;
+        }
+        return false;
+    }
 }

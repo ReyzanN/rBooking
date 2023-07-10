@@ -6,6 +6,7 @@ use App\Http\Requests\AddAppointmentTypeRequest;
 use App\Http\Requests\UpdateAppointmentTypeRequest;
 use App\Models\AppointmentType;
 use App\Models\LocationAPI;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
@@ -68,6 +69,7 @@ class AppointmentTypeController extends Controller
             Session::flash('Failure', 'Ce type de rendez-vous n\'existe pas');
             return redirect()->back();
         }
-        return view('admin.appointment.type.viewType', ['AppointmentType' => $AppointmentTypeSearch]);
+        $Users = User::GetActiveUser();
+        return view('admin.appointment.type.viewType', ['AppointmentType' => $AppointmentTypeSearch, 'Users' => $Users]);
     }
 }

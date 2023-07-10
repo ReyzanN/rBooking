@@ -81,6 +81,12 @@ Route::middleware(['auth','KillSession'])->group(function (){
          * Appointment
          */
         Route::post('/app/administration/appointment/add', [AppointmentsAdministrationController::class, 'AddAppointment'])->name('admin.appointment.add');
+        Route::post('/app/administration/appointment/force/register/user', [AppointmentsAdministrationController::class, 'ForceRegisterUser'])->name('admin.appointment.force.register.user');
+
+
+        /*
+         * TEST ROUTE
+         */
         Route::get('/app/administration/appointment/sendMail', [AppointmentsAdministrationController::class, 'test'])->name('admin.appointment.test');
         Route::get('/app/administration/appointment/preview', [AppointmentsAdministrationController::class, 'preview'])->name('admin.appointment.preview');
 

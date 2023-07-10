@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -141,5 +142,14 @@ class User extends Authenticatable
     public function GetValidityString(): string {
         if ($this->accountValidity == 1) { return "Compte Valide"; }
         return "Compte non valide";
+    }
+
+    /**
+     * @usage Get List of active Users
+     * @return Collection
+     */
+    public static function GetActiveUser(): Collection
+    {
+        return User::where(['accountValidity' => 1])->orderBy('surname', 'asc')->get();
     }
 }

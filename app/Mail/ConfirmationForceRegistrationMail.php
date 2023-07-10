@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\Models\Appointment;
 use App\Models\AppointmentRegistration;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,7 +10,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ConfirmRegistrationMail extends Mailable
+class ConfirmationForceRegistrationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -39,7 +38,7 @@ class ConfirmRegistrationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.registration.confirmRegistration',
+            view: 'emails.registration.forceConfirmation',
             with: [
                 'AppointmentRegistration' => $this->AppointmentRegistration,
                 'LocationComplete' => $this->Location
