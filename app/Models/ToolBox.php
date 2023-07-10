@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
+
 trait ToolBox
 {
     /**
@@ -41,5 +43,20 @@ trait ToolBox
         }else {
             return $Day[$dateTime->format('w')].' '.$dateTime->format('d').' '.$Month[$dateTime->format('M')].' '.$dateTime->format('Y').' - '.$dateTime->format('H').' H '.$dateTime->format('i');
         }
+    }
+
+    /**
+     * @Usage Get a token
+     * @param int $Length
+     * @return string
+     */
+    public function GetToken(int $Length): string
+    {
+        $Token = Str::random($Length);
+        $Check = $this->where(['confirmToken' => $Token])->get()->first();
+        if ($Check) {
+            $this->GetToken($Length);
+        }
+        return Str::random($Length);
     }
 }
