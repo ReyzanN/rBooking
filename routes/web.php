@@ -33,12 +33,15 @@ Route::get('/app/register', AuthentificationController::class)->name('auth.regis
 Route::post('/app/register', [AuthentificationController::class, 'Register'])->name('auth.register.confirm');
 Route::get('/app/login', [AuthentificationController::class, 'Login'])->name('auth.login');
 Route::post('/app/login', [AuthentificationController::class, 'LoginAttempt'])->name('auth.login.confirm');
-Route::get('/app/logout', [AuthentificationController::class, 'LogOut'])->name('auth.logout');
 
 /*
  * Customer Dashboard
 */
 Route::middleware(['auth','KillSession'])->group(function (){
+    /*
+     * Auth
+     */
+    Route::get('/app/logout', [AuthentificationController::class, 'LogOut'])->name('auth.logout');
     /*
      * Dashboard
      */
