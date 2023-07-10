@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddAppointmentRequest;
 use App\Http\Requests\ForceRegistrationForUserRequest;
+use App\Http\Requests\UpdateAppointmentRequest;
 use App\Mail\ConfirmationForceRegistrationMail;
 use App\Mail\ConfirmRegistrationMail;
 use App\Models\Appointment;
@@ -71,6 +72,23 @@ class AppointmentsAdministrationController extends Controller
                     Session::flash('Success','Supprimé avec succès, les personnes inscrites ont été informées');
                 }catch (\Exception $e){
                     Session::flash('Failure', 'Une erreur est survenue');
+                }
+            }
+        }
+        return redirect()->back();
+    }
+
+    public function UpdateAppointment(UpdateAppointmentRequest $request){
+        if (Gate::allows('UserAdmin')){
+            if ($request->validated()){
+                $Appointment = Appointment::find($request->only(['idAppointment']))->first();
+                if ($Appointment){
+                    try {
+                        $Appointment->update($request->only('date','place'));
+                        Session::flash('Success','Modification réalisée avec succès');
+                    }catch (\Exception $e){
+                        Session::flash('Failure','Une erreur est survenue');
+                    }
                 }
             }
         }

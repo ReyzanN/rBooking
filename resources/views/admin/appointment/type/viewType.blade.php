@@ -65,7 +65,7 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
                                             <a href="{{ route('admin.appointment.remove', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button></a>
-                                            <button type="button" class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
+                                            <button type="button" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#AppointmentUpdate" data-bs-idAppointment="{{ $Appointment->id }}" data-bs-date="{{ $Appointment->date }}" data-bs-place="{{ $Appointment->place }}"><i class="bi bi-pencil"></i></button>
                                             <button type="button" class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#RegisterUserForAppointment" data-bs-idAppointment="{{ $Appointment->id }}"><i class="bi bi-person-add"></i></button>
                                             <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
                                         </div>
@@ -87,7 +87,7 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
                                             <a href="{{ route('admin.appointment.remove', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button></a>
-                                            <button type="button" class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
+                                            <button type="button" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#AppointmentUpdate" data-bs-idAppointment="{{ $Appointment->id }}" data-bs-date="{{ $Appointment->date }}" data-bs-place="{{ $Appointment->place }}"><i class="bi bi-pencil"></i></button>
                                             <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
                                         </div>
                                         <small class="text-body-secondary">Place disponibles : {{ $Appointment->GetRemainingPlace() }} / {{ $Appointment->place }}</small>
@@ -259,6 +259,44 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Update Appointment -->
+    <div class="modal fade" id="AppointmentUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="AppointmentUpdateLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="AppointmentUpdateLabel">Modifier un rendez-vous</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('admin.appointment.update') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="idAppointment" id="idAppointmentUpdate" value="">
+                        <div class="row mt-2 mb-2">
+                            <div class="col-6">
+                                <div class="form-floating mb-3">
+                                    <input type="datetime-local" class="form-control" id="dateUpdate" name="date" value="{{ request()->old('date') }}" required>
+                                    <label for="dateUpdate">Date & Heure</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control" id="placeUpdate" name="place" value="{{ request()->old('place') }}" required>
+                                    <label for="placeUpdate">Nombre de places</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-2 mb-2">
+                            <button class="btn btn-warning" type="submit">Modifier</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
@@ -270,6 +308,17 @@
                const IdAppointment = ButtonModal.getAttribute('data-bs-idAppointment')
                const InputValue = document.getElementById('idAppointment')
                InputValue.value = IdAppointment
+           })
+       }
+   </script>
+   <script>
+       let ModalAppointment = document.getElementById('AppointmentUpdate')
+       if (ModalAppointment){
+           ModalAppointment.addEventListener('show.bs.modal', event => {
+               const ButtonModal = event.relatedTarget
+               document.getElementById('idAppointmentUpdate').value = ButtonModal.getAttribute('data-bs-idAppointment')
+               document.getElementById('placeUpdate').value = ButtonModal.getAttribute('data-bs-place')
+               document.getElementById('dateUpdate').value = ButtonModal.getAttribute('data-bs-date')
            })
        }
    </script>

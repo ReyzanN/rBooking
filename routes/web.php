@@ -84,6 +84,7 @@ Route::middleware(['auth','KillSession'])->group(function (){
         Route::post('/app/administration/appointment/add', [AppointmentsAdministrationController::class, 'AddAppointment'])->name('admin.appointment.add');
         Route::post('/app/administration/appointment/force/register/user', [AppointmentsAdministrationController::class, 'ForceRegisterUser'])->name('admin.appointment.force.register.user');
         Route::get('/app/administration/appointment/delete/{IdAppointment}', [AppointmentsAdministrationController::class, 'RemoveAppointment'])->name('admin.appointment.remove');
+        Route::post('/app/administration/appointment/update',[AppointmentsAdministrationController::class, 'UpdateAppointment'])->name('admin.appointment.update');
 
 
         /*
