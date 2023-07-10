@@ -38,7 +38,7 @@
                         <p class="card-text">{{ $AT->description }}</p>
                         <div class="d-flex justify-content-center align-items-center flex-column">
                             <a href="{{ route('admin.appointment.type.view.target', $AT->id) }}"><button class="btn btn-outline-primary mt-2 mb-2"><i class="bi bi-cursor"></i>&nbsp;Selectioner ce type</button></a>
-                            <button class="btn btn-outline-danger mt-2 mb-2"><i class="bi bi-trash"></i>&nbsp;Supprimer ce type</button>
+                            <a href="{{ route('admin.appointment.type.delete', $AT->id) }}"><button class="btn btn-outline-danger mt-2 mb-2"><i class="bi bi-trash"></i>&nbsp;Supprimer ce type</button></a>
                         </div>
                     </div>
                     <div class="card-footer text-body-secondary">

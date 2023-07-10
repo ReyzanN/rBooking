@@ -45,6 +45,14 @@ class AppointmentType extends Model
     ];
 
     /*
+     * References
+     */
+    public function GetAppointment(): \Illuminate\Database\Eloquent\Collection
+    {
+        return $this->hasMany(Appointment::class, 'idAppointmentType','id')->get();
+    }
+
+    /*
      * Functions
      */
 
@@ -85,6 +93,15 @@ class AppointmentType extends Model
      */
     public function GetNonAvailableAppointment(){
         return Appointment::where(['idAppointmentType' => $this->id, 'complete' => 1])->get();
+    }
+
+    public function delete(): ?bool
+    {
+        $Appointment = $this->GetAppointment();
+        foreach ($Appointment as $A){
+            $A->delete();
+        }
+        return parent::delete();
     }
 
 

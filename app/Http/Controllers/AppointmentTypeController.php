@@ -72,4 +72,20 @@ class AppointmentTypeController extends Controller
         $Users = User::GetActiveUser();
         return view('admin.appointment.type.viewType', ['AppointmentType' => $AppointmentTypeSearch, 'Users' => $Users]);
     }
+
+    public function DeleteAppointmentType(int $AppointmentTypeId){
+        if (Gate::allows('UserAdmin')) {
+            $AppointmentTypeSearch = AppointmentType::find($AppointmentTypeId);
+            if ($AppointmentTypeSearch) {
+                try {
+                    $AppointmentTypeSearch->delete();
+                    Session::flash('Success', 'Le type de rendez-vous est supprimé, si des rendez-vous étaient en attentes les personnes ont étaient informées');
+                } catch (\Exception $e) {
+                    dd($e);
+                    Session::flash('Failure', 'Une erreur est survenue');
+                }
+            }
+        }
+        return redirect()->back();
+    }
 }

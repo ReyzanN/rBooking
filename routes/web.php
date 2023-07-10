@@ -77,6 +77,7 @@ Route::middleware(['auth','KillSession'])->group(function (){
         Route::post('/app/administration/appointment/type/add', [AppointmentTypeController::class, 'AddAppointmentType'])->name('admin.appointment.type.add');
         Route::get('/app/administration/appointment/type/view/{IdAppointmentType}', [AppointmentTypeController::class, 'ViewAppointmentType'])->name('admin.appointment.type.view.target');
         Route::post('/app/administration/appointment/type/update', [AppointmentTypeController::class, 'UpdateAppointmentType'])->name('admin.appointment.type.update');
+        Route::get('/app/administration/appointment/type/delete/{IdAppointmentType}', [AppointmentTypeController::class, 'DeleteAppointmentType'])->name('admin.appointment.type.delete');
         /*
          * Appointment
          */
