@@ -61,4 +61,19 @@ class AppointmentsAdministrationController extends Controller
             }
         }
     }
+
+    public function RemoveAppointment($IdAppointment){
+        if (Gate::allows('UserAdmin')){
+            $Appointment = Appointment::find($IdAppointment);
+            if ($Appointment){
+                try {
+                    $Appointment->delete();
+                    Session::flash('Success','Supprimé avec succès, les personnes inscrites ont été informées');
+                }catch (\Exception $e){
+                    Session::flash('Failure', 'Une erreur est survenue');
+                }
+            }
+        }
+        return redirect()->back();
+    }
 }

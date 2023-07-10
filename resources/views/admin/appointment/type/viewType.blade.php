@@ -64,7 +64,7 @@
                                     <p class="card-text"><i class="bi bi-calendar2-week"></i>&nbsp; Rendez-vous le : <b>{{ $Appointment->ParseDateForAppointment($Appointment->date) }}</b></p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                            <a href="{{ route('admin.appointment.remove', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button></a>
                                             <button type="button" class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
                                             <button type="button" class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#RegisterUserForAppointment" data-bs-idAppointment="{{ $Appointment->id }}"><i class="bi bi-person-add"></i></button>
                                             <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
@@ -86,7 +86,7 @@
                                     <p class="card-text"></p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                            <a href="{{ route('admin.appointment.remove', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button></a>
                                             <button type="button" class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
                                             <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
                                         </div>

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Mail\RemovedAppointmentMail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class AppointmentRegistration extends Model
 {
@@ -70,5 +72,16 @@ class AppointmentRegistration extends Model
             return true;
         }
         return false;
+    }
+
+    /**
+     * @usage Delete registration + send email to customer
+     * @return bool|null
+     */
+    public function delete(): ?bool
+    {
+        $Location = $this->GetAppointment()->GetAppointmentType()->streetNumber.' '.$this->GetAppointment()->GetAppointmentType()->street.' '.$this->GetAppointment()->GetAppointmentType()->zipCode.' '.$this->GetAppointment()->GetAppointmentType()->location;
+        Mail::to($this->GetUser())->send(new RemovedAppointmentMail($this,$Location));
+        return parent::delete();
     }
 }

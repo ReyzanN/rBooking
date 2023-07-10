@@ -91,4 +91,12 @@ class Appointment extends Model
         }
         return false;
     }
+
+    public function delete(){
+        $Registration = $this->GetAppointmentRegistration();
+        foreach ($Registration as $Re){
+            $Re->delete();
+        }
+        return parent::delete();
+    }
 }
