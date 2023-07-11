@@ -95,4 +95,34 @@ class AppointmentsAdministrationController extends Controller
         }
         return redirect()->back();
     }
+
+    public function ViewAppointment($IdAppointment){
+        $Appointment = Appointment::find($IdAppointment);
+        if (!$Appointment){
+            Session::flash('Failure','Ce rendez-vous n\'existe pas');
+            return redirect()->back();
+        }
+        return view('admin.appointment.view', ['Appointment' => $Appointment]);
+    }
+
+    public function ArchiveAppointment($IdAppointment){
+        if (Gate::allows('UserAdmin')) {
+            $Appointment = Appointment::find($IdAppointment);
+            if (!$Appointment) {
+                Session::flash('Failure', 'Ce rendez-vous n\'existe pas');
+                return redirect()->back();
+            }
+            try {
+                $AppointmentRegistration = $Appointment->GetAppointmentRegistration();
+                foreach ($AppointmentRegistration as $Registration) {
+                    $Registration->update(['active' => 0, 'present' => 0]);
+                }
+                $Appointment->update(['active' => 0]);
+                Session::flash('Success', 'Archivé');
+            } catch (\Exception $e) {
+                Session::flash('Une erreur est survenue');
+            }
+        }
+        return redirect()->back();
+    }
 }

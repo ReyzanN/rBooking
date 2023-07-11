@@ -20,7 +20,8 @@ class Appointment extends Model
         'idAppointmentType',
         'date',
         'place',
-        'complete'
+        'complete',
+        'active'
     ];
 
     /**
@@ -94,11 +95,23 @@ class Appointment extends Model
         return false;
     }
 
+    /**
+     * @usage Delete method
+     * @return bool|null
+     */
     public function delete(){
         $Registration = $this->GetAppointmentRegistration();
         foreach ($Registration as $Re){
             $Re->delete();
         }
         return parent::delete();
+    }
+
+    /**
+     * @usage Get Count of registration for view
+     * @return int
+     */
+    public function GetCountOfRegistration(): int{
+        return count($this->GetAppointmentRegistration());
     }
 }

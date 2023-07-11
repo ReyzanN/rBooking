@@ -19,6 +19,7 @@ return new class extends Migration
             $table->dateTime('confirmed_at')->nullable(true);
             $table->string('confirmToken',30);
             $table->boolean('active')->default(1);
+            $table->boolean('present')->nullable(true);
             $table->timestamps();
             $table->foreign('idAppointment')->on('appointment')->references('id');
             $table->foreign('idUser')->on('users')->references('id');

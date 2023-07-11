@@ -17,6 +17,7 @@ return new class extends Migration
             $table->dateTime('date');
             $table->integer('place')->default(1);
             $table->integer('complete');
+            $table->boolean('active')->default(1)->nullable(true);
             $table->timestamps();
             $table->foreign('idAppointmentType')->on('appointmenttype')->references('id');
         });

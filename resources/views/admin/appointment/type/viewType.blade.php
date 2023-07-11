@@ -67,7 +67,8 @@
                                             <a href="{{ route('admin.appointment.remove', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button></a>
                                             <button type="button" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#AppointmentUpdate" data-bs-idAppointment="{{ $Appointment->id }}" data-bs-date="{{ $Appointment->date }}" data-bs-place="{{ $Appointment->place }}"><i class="bi bi-pencil"></i></button>
                                             <button type="button" class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#RegisterUserForAppointment" data-bs-idAppointment="{{ $Appointment->id }}"><i class="bi bi-person-add"></i></button>
-                                            <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                            <a href="{{ route('admin.appointment.view', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button></a>
+                                            <a href="{{ route('admin.appointment.archive', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-archive"></i></button></a>
                                         </div>
                                         <small class="text-body-secondary">Place disponibles : {{ $Appointment->GetRemainingPlace() }} / {{ $Appointment->place }}</small>
                                     </div>
@@ -88,7 +89,36 @@
                                         <div class="btn-group">
                                             <a href="{{ route('admin.appointment.remove', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button></a>
                                             <button type="button" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#AppointmentUpdate" data-bs-idAppointment="{{ $Appointment->id }}" data-bs-date="{{ $Appointment->date }}" data-bs-place="{{ $Appointment->place }}"><i class="bi bi-pencil"></i></button>
-                                            <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                            <a href="{{ route('admin.appointment.view', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button></a>
+                                            <a href="{{ route('admin.appointment.archive', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-secondary"><i class="bi bi-archive"></i></button></a>
+                                        </div>
+                                        <small class="text-body-secondary">Place disponibles : {{ $Appointment->GetRemainingPlace() }} / {{ $Appointment->place }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="row mt-3">
+                <h5 class="bg-body-tertiary rounded-3 text-center"><i class="bi bi-archive"></i>&nbsp;Liste des rendez-vous archivés</h5>
+            </div>
+            <div class="col">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    @foreach($AppointmentType->GetInActiveAppointment() as $Appointment)
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <div class="card-img-top d-flex justify-content-center align-items-center">
+                                    <i class="bi bi-calendar-check" style="font-size: 2rem"></i>&nbsp;<span class="badge rounded-pill text-bg-secondary">Archivé</span>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text"><i class="bi bi-calendar2-week"></i>&nbsp; Rendez-vous le : <b>{{ $Appointment->ParseDateForAppointment($Appointment->date) }}</b></p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a href="{{ route('admin.appointment.view', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button></a>
                                         </div>
                                         <small class="text-body-secondary">Place disponibles : {{ $Appointment->GetRemainingPlace() }} / {{ $Appointment->place }}</small>
                                     </div>

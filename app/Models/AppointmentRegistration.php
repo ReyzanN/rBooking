@@ -24,7 +24,8 @@ class AppointmentRegistration extends Model
         'confirmed',
         'confirmed_at',
         'confirmToken',
-        'active'
+        'active',
+        'present'
     ];
 
     /**

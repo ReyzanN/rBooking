@@ -52,6 +52,16 @@ class AppointmentType extends Model
         return $this->hasMany(Appointment::class, 'idAppointmentType','id')->get();
     }
 
+    public function GetActiveAppointment(): \Illuminate\Database\Eloquent\Collection
+    {
+        return $this->hasMany(Appointment::class, 'idAppointmentType','id')->where(['active' => 1])->get();
+    }
+
+    public function GetInActiveAppointment(): \Illuminate\Database\Eloquent\Collection
+    {
+        return $this->hasMany(Appointment::class, 'idAppointmentType','id')->where(['active' => 0])->get();
+    }
+
     /*
      * Functions
      */
@@ -83,7 +93,7 @@ class AppointmentType extends Model
      */
     public function GetAvailableAppointment(): collection
     {
-        return Appointment::where(['idAppointmentType' => $this->id, 'complete' => 0])->get();
+        return Appointment::where(['idAppointmentType' => $this->id, 'complete' => 0,'active' => 1])->get();
     }
 
     /**
@@ -92,7 +102,7 @@ class AppointmentType extends Model
      * @return collection
      */
     public function GetNonAvailableAppointment(){
-        return Appointment::where(['idAppointmentType' => $this->id, 'complete' => 1])->get();
+        return Appointment::where(['idAppointmentType' => $this->id, 'complete' => 1,'active' => 1])->get();
     }
 
     public function delete(): ?bool
@@ -104,6 +114,13 @@ class AppointmentType extends Model
         return parent::delete();
     }
 
+    /**
+     * @usage Get Full location of appointment type
+     * @return string
+     */
+    public function GetLocationFull(): string{
+        return $this->streetNumber.' '.$this->street.' / '.$this->zipCode.' '.$this->location;
+    }
 
 
 

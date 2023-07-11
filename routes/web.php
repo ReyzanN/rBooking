@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthentificationController;
 use App\Http\Controllers\ClientAppointmentController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\DashboardCustomersController;
 use App\Http\Controllers\GuestController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,7 +46,7 @@ Route::middleware(['auth','KillSession'])->group(function (){
     /*
      * Dashboard
      */
-    Route::get('/app/dashboard', \App\Http\Controllers\DashboardCustomersController::class)->name('customer.dashboard');
+    Route::get('/app/dashboard', DashboardCustomersController::class)->name('customer.dashboard');
     /*
      * Customer Settings
     */
@@ -88,7 +89,8 @@ Route::middleware(['auth','KillSession'])->group(function (){
         Route::post('/app/administration/appointment/force/register/user', [AppointmentsAdministrationController::class, 'ForceRegisterUser'])->name('admin.appointment.force.register.user');
         Route::get('/app/administration/appointment/delete/{IdAppointment}', [AppointmentsAdministrationController::class, 'RemoveAppointment'])->name('admin.appointment.remove');
         Route::post('/app/administration/appointment/update',[AppointmentsAdministrationController::class, 'UpdateAppointment'])->name('admin.appointment.update');
-
+        Route::get('/app/administration/appointment/view/{IdAppointment}', [AppointmentsAdministrationController::class, 'ViewAppointment'])->name('admin.appointment.view');
+        Route::get('app/administration/appointment/archive/{IdAppointment}', [AppointmentsAdministrationController::class, 'ArchiveAppointment'])->name('admin.appointment.archive');
 
         /*
          * Ajax Calls
