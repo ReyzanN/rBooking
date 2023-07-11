@@ -91,6 +91,7 @@ Route::middleware(['auth','KillSession'])->group(function (){
         Route::post('/app/administration/appointment/update',[AppointmentsAdministrationController::class, 'UpdateAppointment'])->name('admin.appointment.update');
         Route::get('/app/administration/appointment/view/{IdAppointment}', [AppointmentsAdministrationController::class, 'ViewAppointment'])->name('admin.appointment.view');
         Route::get('app/administration/appointment/archive/{IdAppointment}', [AppointmentsAdministrationController::class, 'ArchiveAppointment'])->name('admin.appointment.archive');
+        Route::get('/app/administration/appointment/registration/updateStatus/{IdRegistration}/{Value}', [AppointmentsAdministrationController::class, 'UpdateStatusRegistration'])->name('admin.appointment.registration.update');
 
         /*
          * Ajax Calls

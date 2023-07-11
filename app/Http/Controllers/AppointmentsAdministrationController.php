@@ -125,4 +125,30 @@ class AppointmentsAdministrationController extends Controller
         }
         return redirect()->back();
     }
+
+    public function UpdateStatusRegistration($IdRegistration,$Value){
+        $Registration = AppointmentRegistration::find($IdRegistration);
+        if (!$Registration){
+            Session::flash('Failure', 'Ce rendez-vous n\'existe pas');
+            return redirect()->back();
+        }
+        if ($Value){
+            try {
+                $Registration->SetPresent();
+                Session::flash('Success','Status actualisé');
+            }catch (\Exception $e){
+                Session::flash('Failure','Une erreur est survenue');
+            }
+
+        }else{
+            try {
+                $Registration->SetNonPresent();
+                Session::flash('Success','Status actualisé');
+            }catch (\Exception $e){
+                Session::flash('Failure','Une erreur est survenue');
+            }
+
+        }
+        return redirect()->back();
+    }
 }

@@ -51,9 +51,8 @@
                         <th scope="row"><a href="tel:{{ $Registration->GetUser()->phone }}">{{ $Registration->GetUser()->phone }}</a></th>
                         <td>
                             @if($Registration->active)
-                            <button class="btn btn-success"><i class="bi bi-check2-all"></i></button>
-                            <button class="btn btn-danger"><i class="bi bi-x-circle"></i></button>
-                            <button class="btn btn-danger"><i class="bi bi-person-dash-fill"></i></button>
+                            <a href="{{ route('admin.appointment.registration.update', [$Registration->id,1]) }}"><button class="btn btn-success"><i class="bi bi-check2-all"></i></button></a>
+                            <a href="{{ route('admin.appointment.registration.update', [$Registration->id,0]) }}"><button class="btn btn-danger"><i class="bi bi-x-circle"></i></button></a>
                             @elseif($Registration->present)
                                 <span class="badge rounded-pill text-bg-success">Présent</span>
                             @else

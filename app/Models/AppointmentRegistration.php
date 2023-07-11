@@ -85,4 +85,16 @@ class AppointmentRegistration extends Model
         Mail::to($this->GetUser())->send(new RemovedAppointmentMail($this,$Location));
         return parent::delete();
     }
+
+    /**
+     * @return void
+     */
+    public function SetPresent(): void
+    {
+        $this->update(['active' => 0, 'present' => 1]);
+    }
+
+    public function SetNonPresent():void {
+        $this->update(['active' => 0, 'present' => 0]);
+    }
 }
