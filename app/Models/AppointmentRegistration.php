@@ -82,7 +82,9 @@ class AppointmentRegistration extends Model
     public function delete(): ?bool
     {
         $Location = $this->GetAppointment()->GetAppointmentType()->streetNumber.' '.$this->GetAppointment()->GetAppointmentType()->street.' '.$this->GetAppointment()->GetAppointmentType()->zipCode.' '.$this->GetAppointment()->GetAppointmentType()->location;
-        Mail::to($this->GetUser())->send(new RemovedAppointmentMail($this,$Location));
+        if ($this->active){
+            Mail::to($this->GetUser())->send(new RemovedAppointmentMail($this,$Location));
+        }
         return parent::delete();
     }
 
