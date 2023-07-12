@@ -17,7 +17,7 @@
                             <div class="accordion" id="AppointmentList">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#Collapse{{$AT->id}}" aria-expanded="true" aria-controls="{{$AT->id}}">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#Collapse{{$AT->id}}" aria-expanded="true" aria-controls="Collapse{{$AT->id}}">
                                                 {{ $AT->name }}
                                         </button>
                                     </h2>
