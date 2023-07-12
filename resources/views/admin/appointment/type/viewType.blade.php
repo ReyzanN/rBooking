@@ -61,7 +61,7 @@
                                     <i class="bi bi-calendar-check" style="font-size: 2rem"></i>&nbsp;<span class="badge rounded-pill text-bg-success">Disponible</span>
                                 </div>
                                 <div class="card-body">
-                                    <p class="card-text"><i class="bi bi-calendar2-week"></i>&nbsp; Rendez-vous le : <b>{{ $Appointment->ParseDateForAppointment($Appointment->date) }}</b></p>
+                                    <p class="card-text"><i class="bi bi-calendar2-week"></i>&nbsp;<b>{{ $Appointment->ParseDateForAppointment($Appointment->date) }}</b></p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
                                             <a href="{{ route('admin.appointment.remove', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button></a>
@@ -83,7 +83,7 @@
                                     <i class="bi bi-calendar-x" style="font-size: 2rem"></i>&nbsp;<span class="badge rounded-pill text-bg-danger">Non disponible</span>
                                 </div>
                                 <div class="card-body">
-                                    <p class="card-text"><i class="bi bi-calendar2-week"></i>&nbsp; Rendez-vous le : <b>{{ $Appointment->ParseDateForAppointment($Appointment->date) }}</b></p>
+                                    <p class="card-text"><i class="bi bi-calendar2-week"></i>&nbsp;<b>{{ $Appointment->ParseDateForAppointment($Appointment->date) }}</b></p>
                                     <p class="card-text"></p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
