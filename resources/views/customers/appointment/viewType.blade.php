@@ -9,6 +9,7 @@
                 <div class="col d-flex flex-column">
                     <h4 class="bg-body-tertiary"><i class="bi bi-hash"></i>&nbsp;{{ $AppointmentType->name }}</h4>
                     <div class="mt-3 mb-3">
+                        <a href="{{ route('customers.appointment.type.view') }}"><button class="btn btn-secondary"><i class="bi bi-arrow-return-left"></i>&nbsp;Retour</button></a>
                         <button class="btn btn-success" onclick="location.reload()"><i class="bi bi-arrow-clockwise"></i>&nbsp;Rafraichir</button>
                     </div>
                     <div>
@@ -36,8 +37,9 @@
                     <h5 class="bg-body-tertiary rounded-3 text-center"><i class="bi bi-calendar-check"></i>&nbsp;Liste des rendez-vous disponibles</h5>
                 </div>
                 <div class="col">
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        @foreach($AppointmentType->GetAvailableAppointment() as $Appointment)
+                    @if(count($Appointments) > 0)
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        @foreach($Appointments as $Appointment)
                             <div class="col">
                                 <div class="card shadow-sm">
                                     <div class="card-img-top d-flex justify-content-center align-items-center">
@@ -55,7 +57,14 @@
                                 </div>
                             </div>
                         @endforeach
-                    </div>
+                        </div>
+                    @else
+                        <div class="col d-flex justify-content-center mt-3">
+                            <div class="alert alert-light" role="alert">
+                                Aucun rendez-vous disponible
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

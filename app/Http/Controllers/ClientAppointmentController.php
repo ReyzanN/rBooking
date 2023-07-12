@@ -28,14 +28,14 @@ class ClientAppointmentController extends Controller
             Session::flash('Failure,','Ce type de rendez-vous n\'existe pas');
             return redirect()->back();
         }
-        $Appointment = $AppointmentType->GetActiveAppointment();
+        $Appointment = $AppointmentType->GetActiveAppointmentForBooking();
         foreach ($Appointment as $A){
             $Registration = $A->GetAppointmentRegistration();
             foreach ($Registration as $R){
                 $R->UpdateValidity();
             }
         }
-        return view('customers.appointment.viewType',['AppointmentType' => $AppointmentType, 'Appointment' => $Appointment]);
+        return view('customers.appointment.viewType',['AppointmentType' => $AppointmentType, 'Appointments' => $Appointment]);
     }
 
     public function RegisterForAppointment($IdAppointment){

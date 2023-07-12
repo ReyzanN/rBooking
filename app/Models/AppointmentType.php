@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class AppointmentType extends Model
 {
@@ -60,6 +61,11 @@ class AppointmentType extends Model
     public function GetInActiveAppointment(): \Illuminate\Database\Eloquent\Collection
     {
         return $this->hasMany(Appointment::class, 'idAppointmentType','id')->where(['active' => 0])->get();
+    }
+
+    public function GetActiveAppointmentForBooking(): \Illuminate\Database\Eloquent\Collection
+    {
+        return $this->hasMany(Appointment::class, 'idAppointmentType','id')->where(['active' => 1])->where(DB::raw('date'),'>', DB::raw('NOW()'))->where(['complete' => 0])->get();
     }
 
     /*
