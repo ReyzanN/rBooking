@@ -31,6 +31,7 @@
                                     <div class="mt-2 mb-2 d-flex justify-content-center align-items-center">
                                         <a href="{{ route('customers.appointment.type.view.target', $Type->id) }}"><button class="btn btn-outline-primary"><i class="bi bi-hand-index-thumb"></i>&nbsp;Prendre rendez-vous</button></a>
                                     </div>
+                                    <small class="text-body-secondary">Rendez-vous disponibles : {{ count($Type->GetActiveAppointmentForBooking()) }}</small>
                                 </div>
                             </div>
                         </div>
