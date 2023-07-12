@@ -17,11 +17,11 @@
                             <div class="accordion" id="AppointmentList">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{$AT->name}}-{{$AT->name}}" aria-expanded="true" aria-controls="{{$AT->name}}-{{$AT->name}}">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#Collapse{{$AT->id}}" aria-expanded="true" aria-controls="{{$AT->id}}">
                                                 {{ $AT->name }}
                                         </button>
                                     </h2>
-                                    <div id="{{$AT->name}}-{{$AT->name}}" class="accordion-collapse collapse" data-bs-parent="#AppointmentList">
+                                    <div id="Collapse{{$AT->id}}" class="accordion-collapse collapse" data-bs-parent="#AppointmentList">
                                         <div class="accordion-body">
                                             <div class="mt-3">
                                                 <p class="bg-body-tertiary rounded-2"><i class="bi bi-calendar-day"></i>&nbsp;Rendez-vous complet</p>
