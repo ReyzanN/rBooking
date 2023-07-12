@@ -3,7 +3,7 @@
 @section('title', $AppointmentType->name)
 
 @section('content')
-    <div class="container">
+    <div class="container mb-5">
         <div class="container mt-2">
             <div class="row mt-2">
                 <div class="col d-flex flex-column">
@@ -20,6 +20,12 @@
             <div class="row mt-2">
                 <div class="col">
                     <div class="row mt-3">
+                        <div class="mt-1 mb-3">
+                            <input type="hidden" name="mapCoords" id="mapCoords" value="{{ $AppointmentType->jsonCoordinatesInformations }}">
+                            <div class="row">
+                                <div id="map" class="rounded-3"></div>
+                            </div>
+                        </div>
                         <h5 class="bg-body-tertiary rounded-3 text-center"><i class="bi bi-info-circle"></i>&nbsp;Informations</h5>
                         <div class="mt-2">
                             <div class="alert alert-light" role="alert">
@@ -40,18 +46,18 @@
                     @if(count($Appointments) > 0)
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                         @foreach($Appointments as $Appointment)
-                            <div class="col">
+                            <div class="col mb-3">
                                 <div class="card shadow-sm">
                                     <div class="card-img-top d-flex justify-content-center align-items-center">
                                         <i class="bi bi-calendar-check" style="font-size: 2rem"></i>&nbsp;<span class="badge rounded-pill text-bg-success">Disponible</span>
                                     </div>
                                     <div class="card-body">
                                         <p class="card-text"><i class="bi bi-calendar2-week"></i>&nbsp;<b>{{ $Appointment->ParseDateForAppointment($Appointment->date) }}</b></p>
+                                        <p class="mt-2 mb-2"><small class="text-body-secondary">Place disponibles : {{ $Appointment->GetRemainingPlace() }} / {{ $Appointment->place }}</small></p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
                                                 <a href="{{ route('customers.appointment.register', $Appointment->id) }}"><button class="btn btn-outline-primary"><i class="bi bi-hand-index-thumb"></i>&nbsp;Prendre rendez-vous</button></a>
                                             </div>
-                                            <small class="text-body-secondary">Place disponibles : {{ $Appointment->GetRemainingPlace() }} / {{ $Appointment->place }}</small>
                                         </div>
                                     </div>
                                 </div>

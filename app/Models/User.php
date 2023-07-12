@@ -51,6 +51,13 @@ class User extends Authenticatable
     ];
 
     /*
+     * References
+     */
+    public function GetAppointmentRegistrationOfDay(){
+        return $this->hasMany(AppointmentRegistration::class,'idUser','id')->get();
+    }
+
+    /*
      * Rank Check Functions
      */
 

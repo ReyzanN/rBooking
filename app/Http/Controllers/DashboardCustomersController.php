@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 
 class DashboardCustomersController extends Controller
 {
@@ -12,6 +13,8 @@ class DashboardCustomersController extends Controller
     }
 
     public function __invoke(){
-        return view('customers.dashboard.index');
+        $Time = new \DateTime();
+        $AppointmentOfDay = auth()->user()->GetAppointmentRegistrationOfDay();
+        return view('customers.dashboard.index', ['Time' => $Time->format('d/m/Y - H:i'),'AppointmentOfDay' => $AppointmentOfDay]);
     }
 }

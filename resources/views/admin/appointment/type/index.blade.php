@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-3 mb-3 col">
+        <div class="row mt-3 mb-5 col">
             @foreach($AppointmentType as $AT)
                 <div class="card text-center mt-2 mb-2">
                     <div class="card-header">
