@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Cassandra\Date;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Appointment extends Model
 {
@@ -113,5 +115,15 @@ class Appointment extends Model
      */
     public function GetCountOfRegistration(): int{
         return count($this->GetAppointmentRegistration());
+    }
+
+    public static function GetAppointmentForDay(){
+        $Date = new \DateTime();
+        $AppointmentType = AppointmentType::all();
+        foreach ($AppointmentType as $A){
+            $A->AppointmentListComplete = Appointment::where(DB::raw('DATE(date)'), '=' ,$Date->format('Y-m-d'))->where(['idAppointmentType' => $A->id])->where(['complete' => 1])->get();
+            $A->AppointmentListInComplete = Appointment::where(DB::raw('DATE(date)'), '=' ,$Date->format('Y-m-d'))->where(['idAppointmentType' => $A->id])->where(['complete' => 0])->get();
+        }
+        return $AppointmentType;
     }
 }

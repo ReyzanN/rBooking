@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 
 class DashboardAdminController extends Controller
@@ -10,6 +11,7 @@ class DashboardAdminController extends Controller
         $this->middleware(['AdministrationMember']);
     }
     public function __invoke(){
-        return view('admin.dashboard.index');
+        $AppointmentList = Appointment::GetAppointmentForDay();
+        return view('admin.dashboard.index', ['AppointmentType' => $AppointmentList]);
     }
 }
