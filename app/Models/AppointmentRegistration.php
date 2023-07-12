@@ -25,7 +25,8 @@ class AppointmentRegistration extends Model
         'confirmed_at',
         'confirmToken',
         'active',
-        'present'
+        'present',
+        'status'
     ];
 
     /**
@@ -68,7 +69,7 @@ class AppointmentRegistration extends Model
      * @return bool
      */
     public static function AppointmentRegistrationAlreadyExistForUser($IdAppointment,$IdUser): bool{
-        $Count = count(AppointmentRegistration::where(['idUser' => $IdUser,'idAppointment' => $IdAppointment])->get());
+        $Count = count(AppointmentRegistration::where(['idUser' => $IdUser,'idAppointment' => $IdAppointment])->where('status', '<>','3')->get());
         if ($Count > 0){
             return true;
         }
@@ -88,6 +89,16 @@ class AppointmentRegistration extends Model
         return parent::delete();
     }
 
+    public function SoftDelete(): void
+    {
+        $Location = $this->GetAppointment()->GetAppointmentType()->streetNumber.' '.$this->GetAppointment()->GetAppointmentType()->street.' '.$this->GetAppointment()->GetAppointmentType()->zipCode.' '.$this->GetAppointment()->GetAppointmentType()->location;
+        if ($this->active){
+            Mail::to($this->GetUser())->send(new RemovedAppointmentMail($this,$Location));
+        }
+        $this->update(['status' => 3, 'confirmed' => 0, 'active' => 0, 'present' => 0]);
+        $this->GetAppointment()->UpdateRegistration();
+    }
+
     /**
      * @return void
      */
@@ -96,7 +107,21 @@ class AppointmentRegistration extends Model
         $this->update(['active' => 0, 'present' => 1]);
     }
 
+    /**
+     * @return void
+     */
     public function SetNonPresent():void {
         $this->update(['active' => 0, 'present' => 0]);
     }
+
+    public function UpdateValidity(){
+        $Created_at = new \DateTime($this->created_at);
+        $DateConfirmationExpiration = new \DateTime(date('Y-m-d H:i:s', strtotime($Created_at->format('Y-m-d H:i:s'). '15 minutes')));
+        if (!$this->confirmed){
+            if($DateConfirmationExpiration < new \DateTime()){
+                $this->SoftDelete();
+            }
+        }
+    }
 }
+

@@ -36,6 +36,11 @@ Route::get('/app/login', [AuthentificationController::class, 'Login'])->name('au
 Route::post('/app/login', [AuthentificationController::class, 'LoginAttempt'])->name('auth.login.confirm');
 
 /*
+ * Appointment Confirmation
+ */
+Route::get('/app/customers/confirm/{Token}', [ClientAppointmentController::class, 'ConfirmAppointment'])->name('appointment.customers.confirm');
+
+/*
  * Customer Dashboard
 */
 Route::middleware(['auth','KillSession'])->group(function (){
@@ -58,6 +63,8 @@ Route::middleware(['auth','KillSession'])->group(function (){
      * Appointment
      */
     Route::get('/app/customers/appointment/view/type', ClientAppointmentController::class)->name('customers.appointment.type.view');
+    Route::get('/app/customers/appointment/view/type/view/{IdAppointmentType}', [ClientAppointmentController::class, 'ViewAppointmentType'])->name('customers.appointment.type.view.target');
+    Route::get('/app/customers/appointment/register/{IdAppointment}', [ClientAppointmentController::class, 'RegisterForAppointment'])->name('customers.appointment.register');
 
     /*
      * Administration Route

@@ -52,7 +52,7 @@ class Appointment extends Model
 
     public function GetAppointmentRegistration(): \Illuminate\Database\Eloquent\Collection
     {
-        return $this->hasMany(AppointmentRegistration::class,'idAppointment','id')->get();
+        return $this->hasMany(AppointmentRegistration::class,'idAppointment','id')->where('status', '<>','3')->get();
     }
 
 
@@ -66,7 +66,7 @@ class Appointment extends Model
      * @return int
      */
     public function GetRemainingPlace(): int{
-        return ($this->place - count(AppointmentRegistration::where(['idAppointment' => $this->id])->where('confirmed', '<>', '3')->get()));
+        return ($this->place - count(AppointmentRegistration::where(['idAppointment' => $this->id])->where('confirmed', '<>', '1')->where('status', '<>','3')->get()));
     }
 
 
@@ -125,5 +125,10 @@ class Appointment extends Model
             $A->AppointmentListInComplete = Appointment::where(DB::raw('DATE(date)'), '=' ,$Date->format('Y-m-d'))->where(['idAppointmentType' => $A->id])->where(['complete' => 0])->get();
         }
         return $AppointmentType;
+    }
+
+    public function GetLocation(): string {
+        $Type = $this->GetAppointmentType();
+        return $Type->streetNumber.' '.$Type->street.' '.$Type->zipCode.' '.$Type->location;
     }
 }

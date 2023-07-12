@@ -40,6 +40,7 @@
                     <th scope="col">Nom</th>
                     <th scope="col">Prénom</th>
                     <th scope="col">Téléphone</th>
+                    <th scope="col">Confirmation</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
@@ -49,6 +50,7 @@
                         <th scope="row">{{ $Registration->GetUser()->surname }}</th>
                         <th scope="row">{{ $Registration->GetUser()->name }}</th>
                         <th scope="row"><a href="tel:{{ $Registration->GetUser()->phone }}">{{ $Registration->GetUser()->phone }}</a></th>
+                        <td>@if($Registration->confirmed) Confirmé @else Non confirmé @endif</td>
                         <td>
                             @if($Registration->active)
                             <a href="{{ route('admin.appointment.registration.update', [$Registration->id,1]) }}"><button class="btn btn-success"><i class="bi bi-check2-all"></i></button></a>
