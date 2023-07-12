@@ -39,6 +39,7 @@ Route::post('/app/login', [AuthentificationController::class, 'LoginAttempt'])->
  * Appointment Confirmation
  */
 Route::get('/app/customers/confirm/{Token}', [ClientAppointmentController::class, 'ConfirmAppointment'])->name('appointment.customers.confirm');
+Route::get('/app/customers/unconfirm/{Token}', [ClientAppointmentController::class, 'UnConfirmAppointment'])->name('appointment.customers.unconfirm');
 
 /*
  * Customer Dashboard

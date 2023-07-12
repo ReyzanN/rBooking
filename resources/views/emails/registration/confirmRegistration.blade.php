@@ -16,7 +16,7 @@
                 <a href="{{ route('appointment.customers.confirm', $AppointmentRegistration->confirmToken) }}"><button class="btn btn-success"><i class="bi bi-check-circle"></i>&nbsp;Confirmer</button></a>
             </div>
             <div class="col">
-                <button class="btn btn-outline-danger"><i class="bi bi-check-circle"></i>&nbsp;Annuler</button>
+                <a href="{{ route('appointment.customers.unconfirm', $AppointmentRegistration->confirmToken) }}"><button class="btn btn-outline-danger"><i class="bi bi-check-circle"></i>&nbsp;Annuler</button></a>
             </div>
         </div>
     </div>

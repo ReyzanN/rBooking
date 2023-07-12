@@ -88,4 +88,28 @@ class ClientAppointmentController extends Controller
         }
         return view('guest.confirmation');
     }
+
+    public function UnConfirmAppointment($Token): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    {
+        $AppointmentRegistration = AppointmentRegistration::where(['confirmToken' => $Token])->get()->first();
+        if (!$AppointmentRegistration) {
+            Session::flash('Failure','Cette confirmation ne correspond à aucun rendez-vous');
+            return redirect()->route('customer.dashboard');
+        }
+        $Created_at = new \DateTime($AppointmentRegistration->created_at);
+        $DateConfirmationExpiration = new \DateTime(date('Y-m-d H:i:s', strtotime($Created_at->format('Y-m-d H:i:s'). '15 minutes')));
+        if($DateConfirmationExpiration > new \DateTime()) {
+            try {
+                $AppointmentRegistration->update(['confirmed' => 0, 'confirmed_at' => new \DateTime(), 'status' => 3]);
+                $AppointmentRegistration->SoftDelete();
+                Session::flash('Success', 'Votre rendez-vous est dé-confirmé, Merci !');
+            } catch (\Exception $e) {
+                Session::flash('Failure', 'Une erreur est survenue');
+            }
+        }else {
+            $AppointmentRegistration->SoftDelete();
+            Session::flash('Failure','Le rendez-vous à déjà expiré.');
+        }
+        return view('guest.confirmation');
+    }
 }
