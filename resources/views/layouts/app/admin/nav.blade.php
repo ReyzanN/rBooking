@@ -13,9 +13,6 @@
                     <a class="nav-link active" aria-current="page" href="{{ route('admin.dashboard') }}"><i class="bi bi-person-lock"></i>&nbsp;Accueil Panel</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Rendez-vous | Voir tout</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link active" href="{{ route('admin.appointment.type.view') }}">Gestion Type Rendez-vous</a>
                 </li>
                 <li class="nav-item dropdown">
