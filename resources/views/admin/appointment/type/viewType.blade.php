@@ -16,7 +16,8 @@
         <div class="row mt-2">
             <div class="col d-flex flex-column">
                 <h4 class="bg-body-tertiary"><i class="bi bi-hash"></i>&nbsp;Type de rendez-vous : {{ $AppointmentType->name }}</h4>
-                <div><span class="badge text-bg-light">Total de rendez-vous : 12</span></div>
+                <div><span class="badge text-bg-light">Total de rendez-vous : {{ count($AppointmentType->GetAppointment()) }}</span></div>
+                <div><span class="badge text-bg-light">Total de rendez-vous disponible : {{ count($AppointmentType->GetAvailableAppointment()) }}</span></div>
                 <div class="mt-2">
                     <button class="btn btn-outline-success mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#AddAppointment"><i class="bi bi-bookmark-plus"></i>&nbsp;Ajouter un créneau de rendez-vous</button>
                     <button class="btn btn-outline-warning mt-2 mb-2" data-bs-toggle="modal" data-bs-target="#updateType"><i class="bi bi-pencil-square"></i>&nbsp;Modifier le type</button>
