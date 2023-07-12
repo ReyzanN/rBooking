@@ -119,6 +119,7 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
                                             <a href="{{ route('admin.appointment.view', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button></a>
+                                            <a href="{{ route('admin.appointment.remove', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button></a>
                                         </div>
                                         <small class="text-body-secondary">Place disponibles : {{ $Appointment->GetRemainingPlace() }} / {{ $Appointment->place }}</small>
                                     </div>
