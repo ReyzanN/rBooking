@@ -13,6 +13,10 @@
         </nav>
 
         <div class="row">
+            @include('layouts.app.common.errors')
+        </div>
+
+        <div class="row">
             <h4 class="bg-body-tertiary rounded-3 mt-2 mb-2"><i class="bi bi-geo-alt"></i>&nbsp;Lieu du rendez-vous</h4>
             <div class="row">
                 <div class="mt-1 mb-3">
@@ -49,7 +53,7 @@
             @if($Registration->status == 2)
                 <div class="mt-1 mb-3">
                     <ul class="list-group mt-3 mb-5">
-                        <li class="list-group-item d-flex justify-content-center align-items-center"><button class="btn btn-danger">Annuler mon rendez-vous</button> </li>
+                        <li class="list-group-item d-flex justify-content-center align-items-center"><a href="{{ route('customers.appointment.cancel', $Registration->id) }}"><button class="btn btn-danger">Annuler mon rendez-vous</button></a></li>
                     </ul>
                 </div>
             @elseif($Registration->status == 1)

@@ -132,5 +132,17 @@ class AppointmentRegistration extends Model
     public static function FindForUser($Id){
         return AppointmentRegistration::where(['id' => $Id])->where(['idUser' => auth()->user()->id])->get()->first();
     }
+
+    /**
+     * @param array $attributes
+     * @param array $options
+     * @return bool
+     */
+    public function update(array $attributes = [], array $options = [])
+    {
+        $temp = parent::update($attributes, $options);
+        $this->GetAppointment()->UpdateRegistration();
+        return $temp;
+    }
 }
 

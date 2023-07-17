@@ -14,7 +14,7 @@ class ClientAppointmentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth'])->except('ConfirmAppointment');
+        $this->middleware(['auth'])->except('ConfirmAppointment','UnConfirmAppointment');
     }
 
     public function __invoke(){
@@ -73,18 +73,22 @@ class ClientAppointmentController extends Controller
             Session::flash('Failure','Cette confirmation ne correspond à aucun rendez-vous');
             return redirect()->route('customer.dashboard');
         }
-        $Created_at = new \DateTime($AppointmentRegistration->created_at);
-        $DateConfirmationExpiration = new \DateTime(date('Y-m-d H:i:s', strtotime($Created_at->format('Y-m-d H:i:s'). '15 minutes')));
-        if($DateConfirmationExpiration > new \DateTime()) {
-            try {
-                $AppointmentRegistration->update(['confirmed' => 1, 'confirmed_at' => new \DateTime(), 'status' => 2]);
-                Session::flash('Success', 'Votre rendez-vous est confirmé, Merci !');
-            } catch (\Exception $e) {
-                Session::flash('Failure', 'Une erreur est survenue');
+        if ($AppointmentRegistration->confirmed_at === null) {
+            $Created_at = new \DateTime($AppointmentRegistration->created_at);
+            $DateConfirmationExpiration = new \DateTime(date('Y-m-d H:i:s', strtotime($Created_at->format('Y-m-d H:i:s') . '15 minutes')));
+            if ($DateConfirmationExpiration > new \DateTime()) {
+                try {
+                    $AppointmentRegistration->update(['confirmed' => 1, 'confirmed_at' => new \DateTime(), 'status' => 2]);
+                    Session::flash('Success', 'Votre rendez-vous est confirmé, Merci !');
+                } catch (\Exception $e) {
+                    Session::flash('Failure', 'Une erreur est survenue');
+                }
+            } else {
+                $AppointmentRegistration->SoftDelete();
+                Session::flash('Failure', 'Le rendez-vous à expiré.');
             }
         }else {
-            $AppointmentRegistration->SoftDelete();
-            Session::flash('Failure','Le rendez-vous à expiré.');
+            Session::flash('Failure', 'Ce token est expiré');
         }
         return view('guest.confirmation');
     }
@@ -96,19 +100,23 @@ class ClientAppointmentController extends Controller
             Session::flash('Failure','Cette confirmation ne correspond à aucun rendez-vous');
             return redirect()->route('customer.dashboard');
         }
-        $Created_at = new \DateTime($AppointmentRegistration->created_at);
-        $DateConfirmationExpiration = new \DateTime(date('Y-m-d H:i:s', strtotime($Created_at->format('Y-m-d H:i:s'). '15 minutes')));
-        if($DateConfirmationExpiration > new \DateTime()) {
-            try {
-                $AppointmentRegistration->update(['confirmed' => 0, 'confirmed_at' => new \DateTime(), 'status' => 3]);
+        if ($AppointmentRegistration->confirmed_at === null) {
+            $Created_at = new \DateTime($AppointmentRegistration->created_at);
+            $DateConfirmationExpiration = new \DateTime(date('Y-m-d H:i:s', strtotime($Created_at->format('Y-m-d H:i:s') . '15 minutes')));
+            if ($DateConfirmationExpiration > new \DateTime()) {
+                try {
+                    $AppointmentRegistration->update(['confirmed' => 0, 'confirmed_at' => new \DateTime(), 'status' => 3]);
+                    $AppointmentRegistration->SoftDelete();
+                    Session::flash('Success', 'Votre rendez-vous est dé-confirmé, Merci !');
+                } catch (\Exception $e) {
+                    Session::flash('Failure', 'Une erreur est survenue');
+                }
+            } else {
                 $AppointmentRegistration->SoftDelete();
-                Session::flash('Success', 'Votre rendez-vous est dé-confirmé, Merci !');
-            } catch (\Exception $e) {
-                Session::flash('Failure', 'Une erreur est survenue');
+                Session::flash('Failure', 'Le rendez-vous à déjà expiré.');
             }
         }else {
-            $AppointmentRegistration->SoftDelete();
-            Session::flash('Failure','Le rendez-vous à déjà expiré.');
+            Session::flash('Failure', 'Ce token est expiré');
         }
         return view('guest.confirmation');
     }
@@ -120,5 +128,28 @@ class ClientAppointmentController extends Controller
             return redirect()->back();
         }
         return view('customers.appointment.viewMyAppointment', ['Registration' => $Registration]);
+    }
+
+    public function CancelAppointment($IdRegistration){
+        $Registration = AppointmentRegistration::FindForUser($IdRegistration);
+        if (!$Registration){
+            Session::flash('Failure','Ce rendez-vous n\'existe pas');
+            return redirect()->back();
+        }
+        if (!$Registration->confirmed){
+            Session::flash('Failure','Pour annuler ce rendez-vous, merci d\'utiliser le lien reçu par email');
+            return redirect()->back();
+        }
+        if ($Registration->status == 3 || $Registration->active = 0){
+            Session::flash('Failure','Ce rendez-vous n\'est plus modifiable');
+            return redirect()->back();
+        }
+        try {
+            $Registration->SoftDelete();
+            Session::flash('Success', 'Votre rendez-vous est annulé');
+        }catch (\Exception $e){
+            Session::flash('Failure', 'Une erreur est survenue');
+        }
+        return redirect()->back();
     }
 }
