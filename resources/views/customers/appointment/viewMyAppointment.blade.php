@@ -31,10 +31,10 @@
                     <li class="list-group-item">Status :
                         @switch($Registration->status)
                             @case(1)
-                            <span class="badge rounded-pill text-bg-success">Confirmé</span>
-                            @break
+                                <span class="badge rounded-pill text-bg-warning">Confirmation en attente</span>
+                                @break
                             @case(2)
-                            <span class="badge rounded-pill text-bg-warning">Confirmation en attente</span>
+                            <span class="badge rounded-pill text-bg-success">Confirmé</span>
                             @break
                             @case(3)
                             <span class="badge rounded-pill text-bg-danger">Annuler</span>
@@ -46,13 +46,13 @@
                 </ul>
             </div>
             <h4 class="bg-body-tertiary rounded-3 mt-2 mb-2"><i class="bi bi-hand-index-thumb"></i>&nbsp;Vos Actions</h4>
-            @if($Registration->status == 1)
+            @if($Registration->status == 2)
                 <div class="mt-1 mb-3">
                     <ul class="list-group mt-3 mb-5">
                         <li class="list-group-item d-flex justify-content-center align-items-center"><button class="btn btn-danger">Annuler mon rendez-vous</button> </li>
                     </ul>
                 </div>
-            @elseif($Registration->status == 2)
+            @elseif($Registration->status == 1)
                 <div class="mt-1 mb-5">
                     <div class="alert alert-warning" role="alert">
                         Pour annuler ce rendez-vous, servez vous du lien reçu par email.
