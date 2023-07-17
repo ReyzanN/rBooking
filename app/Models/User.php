@@ -54,8 +54,9 @@ class User extends Authenticatable
     /*
      * References
      */
+
     public function GetAppointmentRegistrationOfDay(){
-         return $this->hasMany(AppointmentRegistration::class,'idUser','id')->join('appointment','appointment.id','=','appointment_registration.idAppointment')->where(DB::raw('DATE(appointment.date)'),'=','2023-07-17')->get();
+        return $this->hasMany(AppointmentRegistration::class,'idUser','id')->whereRaw('appointment_registration.idAppointment IN (SELECT appointment.id FROM appointment WHERE DATE(appointment.date) = DATE(NOW()))')->get();
     }
 
     /*
