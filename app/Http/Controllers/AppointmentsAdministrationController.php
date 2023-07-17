@@ -115,7 +115,9 @@ class AppointmentsAdministrationController extends Controller
             try {
                 $AppointmentRegistration = $Appointment->GetAppointmentRegistration();
                 foreach ($AppointmentRegistration as $Registration) {
-                    $Registration->update(['active' => 0, 'present' => 0]);
+                    if ($Registration->present === null){
+                        $Registration->update(['active' => 0, 'present' => 0]);
+                    }
                 }
                 $Appointment->update(['active' => 0]);
                 Session::flash('Success', 'Archivé');
