@@ -112,4 +112,13 @@ class ClientAppointmentController extends Controller
         }
         return view('guest.confirmation');
     }
+
+    public function ViewMyAppointment($IdRegistration){
+        $Registration = AppointmentRegistration::FindForUser($IdRegistration);
+        if (!$Registration){
+            Session::flash('Failure','Ce rendez-vous n\'existe pas');
+            return redirect()->back();
+        }
+        return view('customers.appointment.viewMyAppointment', ['Registration' => $Registration]);
+    }
 }

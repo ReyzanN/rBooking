@@ -56,7 +56,15 @@ class User extends Authenticatable
      */
 
     public function GetAppointmentRegistrationOfDay(){
-        return $this->hasMany(AppointmentRegistration::class,'idUser','id')->whereRaw('appointment_registration.idAppointment IN (SELECT appointment.id FROM appointment WHERE DATE(appointment.date) = DATE(NOW()))')->get();
+        return $this->hasMany(AppointmentRegistration::class,'idUser','id')->whereRaw('appointment_registration.idAppointment IN (SELECT appointment.id FROM appointment WHERE DATE(appointment.date) = DATE(NOW()))')->where(['status' => 1])->get();
+    }
+
+    public function GetPendingConfirmationAppointment(){
+        return $this->hasMany(AppointmentRegistration::class,'idUser','id')->where(['status' => 2])->get();
+    }
+
+    public function GetCanceledAppointment(){
+        return $this->hasMany(AppointmentRegistration::class,'idUser','id')->where(['status' => 3])->get();
     }
 
     /*

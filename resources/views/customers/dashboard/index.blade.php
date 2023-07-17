@@ -25,7 +25,7 @@
                                     <div class="card-body">
                                         <p class="text-center"><i class="bi bi-calendar"></i>&nbsp;{{ $Registration->ParseDateToString($Registration->GetAppointment()->date) }}</p>
                                         <div class="mt-2 mb-2 d-flex justify-content-center align-items-center">
-                                            <button class="btn btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                            <a href="{{ route('customers.appointment.my.view', $Registration) }}"><button class="btn btn-outline-primary"><i class="bi bi-eye"></i></button></a>
                                         </div>
                                     </div>
                                 </div>
@@ -42,8 +42,30 @@
             </div>
             <div class="col">
                 <h4><i class="bi bi-calendar-check"></i>&nbsp;Rendez-vous en attente de confirmation</h4>
-                <div class="d-flex justify-content-center align-items-center">
-
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-2">
+                    @if(count($AppointmentConfirmationPending) > 0)
+                        @foreach($AppointmentConfirmationPending as $Registration)
+                            <div class="col">
+                                <div class="card shadow-sm">
+                                    <div class="card-img-top d-flex justify-content-center align-items-center">
+                                        <i class="bi bi-calendar" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }}
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-center"><i class="bi bi-calendar"></i>&nbsp;{{ $Registration->ParseDateToString($Registration->GetAppointment()->date) }}</p>
+                                        <div class="mt-2 mb-2 d-flex justify-content-center align-items-center">
+                                            <a href="{{ route('customers.appointment.my.view', $Registration) }}"><button class="btn btn-outline-primary"><i class="bi bi-eye"></i></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div class="alert alert-light text-center" role="alert">
+                                Aucun rendez-vous en attente de confirmation
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

@@ -123,5 +123,14 @@ class AppointmentRegistration extends Model
             }
         }
     }
+
+    /**
+     * @usage find for user
+     * @param $Id
+     * @return mixed
+     */
+    public static function FindForUser($Id){
+        return AppointmentRegistration::where(['id' => $Id])->where(['idUser' => auth()->user()->id])->get()->first();
+    }
 }
 

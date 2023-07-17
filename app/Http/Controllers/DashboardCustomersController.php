@@ -15,6 +15,7 @@ class DashboardCustomersController extends Controller
     public function __invoke(){
         $Time = new \DateTime();
         $AppointmentOfDay = auth()->user()->GetAppointmentRegistrationOfDay();
-        return view('customers.dashboard.index', ['Time' => $Time->format('d/m/Y - H:i'),'AppointmentOfDay' => $AppointmentOfDay]);
+        $AppointmentConfirmationPending = auth()->user()->GetPendingConfirmationAppointment();
+        return view('customers.dashboard.index', ['Time' => $Time->format('d/m/Y - H:i'),'AppointmentOfDay' => $AppointmentOfDay, 'AppointmentConfirmationPending' => $AppointmentConfirmationPending]);
     }
 }
