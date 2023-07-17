@@ -169,4 +169,8 @@ class User extends Authenticatable
     {
         return User::where(['accountValidity' => 1])->orderBy('surname', 'asc')->get();
     }
+
+    public function KillSession(){
+        $this->update(['killSession' => 0]);
+    }
 }

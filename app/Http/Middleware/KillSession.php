@@ -15,7 +15,10 @@ class KillSession
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->killSession) { return redirect()->route('auth.logout'); }
+        if (auth()->user()->killSession) {
+            auth()->user()->KillSession();
+            return redirect()->route('auth.logout');
+        }
         return $next($request);
     }
 }
