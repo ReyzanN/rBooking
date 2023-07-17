@@ -47,21 +47,33 @@
                     </li>
                     <li class="list-group-item">Nombre de place : {{ $Registration->GetAppointment()->place }}</li>
                     <li class="list-group-item">Complet : @if($Registration->GetAppointment()->complete) <span class="badge rounded-pill text-bg-success">Oui</span> @else <span class="badge rounded-pill text-bg-danger">Non</span> @endif</li>
+                    @if(!$Registration->active)
+                        <li class="list-group-item">Rendez-vous archivé</li>
+                        <li class="list-group-item">Présence : @if($Registration->present) <span class="badge rounded-pill text-bg-success">Oui</span> @else <span class="badge rounded-pill text-bg-warning">Non</span> @endif</li>
+                    @endif
                 </ul>
             </div>
             <h4 class="bg-body-tertiary rounded-3 mt-2 mb-2"><i class="bi bi-hand-index-thumb"></i>&nbsp;Vos Actions</h4>
-            @if($Registration->status == 2)
-                <div class="mt-1 mb-3">
-                    <ul class="list-group mt-3 mb-5">
-                        <li class="list-group-item d-flex justify-content-center align-items-center"><a href="{{ route('customers.appointment.cancel', $Registration->id) }}"><button class="btn btn-danger">Annuler mon rendez-vous</button></a></li>
-                    </ul>
-                </div>
-            @elseif($Registration->status == 1)
-                <div class="mt-1 mb-5">
-                    <div class="alert alert-warning" role="alert">
-                        Pour annuler ce rendez-vous, servez vous du lien reçu par email.
+            @if($Registration->active)
+                @if($Registration->status == 2)
+                    <div class="mt-1 mb-3">
+                        <ul class="list-group mt-3 mb-5">
+                            <li class="list-group-item d-flex justify-content-center align-items-center"><a href="{{ route('customers.appointment.cancel', $Registration->id) }}"><button class="btn btn-danger">Annuler mon rendez-vous</button></a></li>
+                        </ul>
                     </div>
-                </div>
+                @elseif($Registration->status == 1)
+                    <div class="mt-1 mb-5">
+                        <div class="alert alert-warning" role="alert">
+                            Pour annuler ce rendez-vous, servez vous du lien reçu par email.
+                        </div>
+                    </div>
+                @else
+                    <div class="mt-1 mb-5">
+                        <div class="alert alert-light" role="alert">
+                            Aucune action disponible
+                        </div>
+                    </div>
+                @endif
             @else
                 <div class="mt-1 mb-5">
                     <div class="alert alert-light" role="alert">

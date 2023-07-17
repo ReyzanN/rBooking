@@ -44,7 +44,7 @@ class AppointmentsAdministrationController extends Controller
                 $IdUser = $request->only(['idUser']);
                 if (!AppointmentRegistration::AppointmentRegistrationAlreadyExistForUser($IdAppointment,$IdUser)){
                     try {
-                        $AppointmentRegistration = AppointmentRegistration::create(array_merge($request->only('idAppointment','idUser'),array('confirmed' => 1,'confirmed_at' => new \DateTime(),'active' => 1)));
+                        $AppointmentRegistration = AppointmentRegistration::create(array_merge($request->only('idAppointment','idUser'),array('confirmed' => 1,'confirmed_at' => new \DateTime(),'active' => 1,'status' => 2)));
                         $Appointment = Appointment::find($AppointmentRegistration->idAppointment);
                         $Appointment->UpdateRegistration();
                         $Token = $AppointmentRegistration->GetToken(30);
