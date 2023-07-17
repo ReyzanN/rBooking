@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -54,7 +55,7 @@ class User extends Authenticatable
      * References
      */
     public function GetAppointmentRegistrationOfDay(){
-        return $this->hasMany(AppointmentRegistration::class,'idUser','id')->get();
+         return $this->hasMany(AppointmentRegistration::class,'idUser','id')->join('appointment','appointment.id','=','appointment_registration.idAppointment')->where(DB::raw('DATE(appointment.date)'),'=','2023-07-17')->get();
     }
 
     /*
