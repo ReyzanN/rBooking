@@ -20,12 +20,12 @@
                             <div class="col">
                                 <div class="card shadow-sm">
                                     <div class="card-img-top d-flex justify-content-center align-items-center">
-                                        <i class="bi bi-calendar" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }}
+                                        <i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }}
                                     </div>
                                     <div class="card-body">
-                                        <p class="text-center"><i class="bi bi-calendar"></i>&nbsp;{{ $Registration->ParseDateToString($Registration->GetAppointment()->date) }}</p>
+                                        <p class="text-center"><i class="bi bi-clock"></i>&nbsp;{{ $Registration->ParseDateToString($Registration->GetAppointment()->date) }}</p>
                                         <div class="mt-2 mb-2 d-flex justify-content-center align-items-center">
-                                            <a href="{{ route('customers.appointment.my.view', $Registration) }}"><button class="btn btn-outline-primary"><i class="bi bi-eye"></i></button></a>
+                                            <a href="{{ route('customers.appointment.my.view', $Registration) }}"><button class="btn btn-outline-primary"><i class="bi bi-eye"></i>&nbsp;Voir</button></a>
                                         </div>
                                     </div>
                                 </div>
@@ -48,12 +48,12 @@
                             <div class="col">
                                 <div class="card shadow-sm">
                                     <div class="card-img-top d-flex justify-content-center align-items-center">
-                                        <i class="bi bi-calendar" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }}
+                                        <i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }}
                                     </div>
                                     <div class="card-body">
-                                        <p class="text-center"><i class="bi bi-calendar"></i>&nbsp;{{ $Registration->ParseDateToString($Registration->GetAppointment()->date) }}</p>
+                                        <p class="text-center"><i class="bi bi-clock"></i>&nbsp;{{ $Registration->ParseDateToString($Registration->GetAppointment()->date) }}</p>
                                         <div class="mt-2 mb-2 d-flex justify-content-center align-items-center">
-                                            <a href="{{ route('customers.appointment.my.view', $Registration) }}"><button class="btn btn-outline-primary"><i class="bi bi-eye"></i></button></a>
+                                            <a href="{{ route('customers.appointment.my.view', $Registration) }}"><button class="btn btn-outline-primary"><i class="bi bi-eye"></i>&nbsp;Voir</button></a>
                                         </div>
                                     </div>
                                 </div>

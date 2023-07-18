@@ -47,8 +47,8 @@
                     </li>
                     <li class="list-group-item">Nombre de place : {{ $Registration->GetAppointment()->place }}</li>
                     <li class="list-group-item">Complet : @if($Registration->GetAppointment()->complete) <span class="badge rounded-pill text-bg-success">Oui</span> @else <span class="badge rounded-pill text-bg-danger">Non</span> @endif</li>
-                    @if(!$Registration->active)
-                        <li class="list-group-item">Rendez-vous archivé</li>
+                    @if(!$Registration->GetAppointment()->active)
+                        <li class="list-group-item"><span class="badge text-bg-warning">Rendez-vous archivé</span></li>
                         <li class="list-group-item">Présence : @if($Registration->present) <span class="badge rounded-pill text-bg-success">Oui</span> @else <span class="badge rounded-pill text-bg-warning">Non</span> @endif</li>
                     @endif
                 </ul>
