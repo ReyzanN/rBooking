@@ -9,6 +9,7 @@
                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Tableau de bord</a></li>
                 <li class="breadcrumb-item">Rendez-vous</li>
                 <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.appointment.type.view.target', $Appointment->GetAppointmentType()->id) }}">{{ $Appointment->GetAppointmentType()->name }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="#">{{ $Appointment->parseDateToString($Appointment->date) }}</a></li>
             </ol>
         </nav>
 
@@ -20,16 +21,22 @@
             <h4 class="bg-body-tertiary rounded-2"><i class="bi bi-info-circle"></i>&nbsp;Information</h4>
             <div class="d-flex">
                 <ul class="list-group">
+                    @if(!$Appointment->active)
+                        <li class="list-group-item"><span class="badge text-bg-warning">Archivé</span></li>
+                    @endif
                     <li class="list-group-item">Date & Heure : {{ $Appointment->ParseDateToString($Appointment->date) }}</li>
                     <li class="list-group-item">Type de rendez-vous : {{ $Appointment->GetAppointmentType()->name }}</li>
                     <li class="list-group-item">Adresse : {{ $Appointment->GetAppointmentType()->GetLocationFull() }}</li>
                     <li class="list-group-item">Nombre de place : {{ $Appointment->place }}</li>
                     <li class="list-group-item">Nombre d'inscrit : {{ $Appointment->GetCountOfRegistration() }}</li>
+                    <li class="list-group-item">Nombre d'inscrit : {{ $Appointment->GetCountOfRegistration() }}</li>
                 </ul>
             </div>
-            <div class="mt-2 mb-2">
-                <a href="{{ route('admin.appointment.archive', $Appointment->id) }}"><button class="btn btn-warning"><i class="bi bi-archive"></i>&nbsp;Archiver</button></a>
-            </div>
+            @if($Appointment->acitve)
+                <div class="mt-2 mb-2">
+                    <a href="{{ route('admin.appointment.archive', $Appointment->id) }}"><button class="btn btn-warning"><i class="bi bi-archive"></i>&nbsp;Archiver</button></a>
+                </div>
+            @endif
         </div>
 
         <div class="row mt-4">
