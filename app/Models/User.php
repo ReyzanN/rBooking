@@ -67,6 +67,10 @@ class User extends Authenticatable
         return $this->hasMany(AppointmentRegistration::class,'idUser','id')->where(['status' => 3])->get();
     }
 
+    public function GetRegistration(){
+        return $this->hasMany(AppointmentRegistration::class,'idUser','id')->get();
+    }
+
     /*
      * Rank Check Functions
      */
@@ -106,6 +110,18 @@ class User extends Authenticatable
     /*
      * Functions
      */
+
+    /**
+     * @usage Delete users
+     * @return bool|null
+     */
+    public function delete(): ?bool
+    {
+        foreach ($this->GetRegistration() as $Registration){
+            $Registration->delete();
+        }
+        return parent::delete();
+    }
 
     /**
      * @date 04/07/2023
