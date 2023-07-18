@@ -74,7 +74,7 @@
                 @endif
             </form>
             <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#UpdateRight" data-bs-user="{{ $User->id }}" data-bs-right="{{ $User->GetRankString() }}"><i class="bi bi-person-gear"></i></button>
-            <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+            <a href="{{ route('admin.members.delete.account', $User->id) }}"><button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button></a>
         </div>
     @endif
 </div>

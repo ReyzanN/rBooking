@@ -84,6 +84,7 @@ Route::middleware(['auth','KillSession'])->group(function (){
         Route::post('/app/administration/members/update/rank', [AdministrationController::class, 'UpdateUserRank'])->name('admin.members.update.rank');
         Route::post('/app/administration/members/update/block', [AdministrationController::class, 'BlockUserAccount'])->name('admin.members.update.block');
         Route::get('/app/administration/members/view/suspended', [AdministrationController::class, 'ViewSuspendedUsersList'])->name('admin.members.suspended.view');
+        Route::get('/app/administration/members/delete/account/{IdAccount}' , [AdministrationController::class, 'DeleteUserAccount'])->name('admin.members.delete.account');
         /*
          * Appointment Type
         */

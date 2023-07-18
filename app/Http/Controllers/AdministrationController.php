@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BlockingRequest;
 use App\Http\Requests\UpdateUserRankRequest;
+use App\Mail\DeleteAccountMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class AdministrationController extends Controller
@@ -94,6 +96,32 @@ class AdministrationController extends Controller
         $User = User::where(['accountValidity' => 0])->get();
         $Count = count($User);
         return view('admin.users.suspended', ['Users' => $User,'Count' => $Count]);
+    }
+
+    public function DeleteUserAccount($IdAccount){
+        if (Gate::allows('UserSuperAdmin')){
+            $User = User::find($IdAccount);
+            if (!$User) {
+                Session::flash('Failure','Ce compte n\'existe pas');
+                return redirect()->back();
+            }
+            if ($User->id == auth()->user()->id){
+                Session::flash('Failure','Vous ne pouvez pas supprimer votre compte');
+                return redirect()->back();
+            }
+            if ($User->id == env('APP_DEFAULT_ACCOUNT')){
+                Session::flash('Failure','Vous ne pouvez pas supprimer le compte par défaut');
+                return redirect()->back();
+            }
+            try {
+                Mail::to($User->email)->send(new DeleteAccountMail());
+                $User->delete();
+                Session::flash('Success','Le compte à été supprimé');
+            }catch (\Exception $e){
+                Session::flash('Failure','Une erreur est survenue');
+            }
+            return redirect()->back();
+        }
     }
 
 
