@@ -10,7 +10,7 @@
                     <a class="nav-link active" aria-current="page" href="{{ route('customer.dashboard') }}"><i class="bi bi-house"></i>&nbsp;Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Mes rendez-vous</a>
+                    <a class="nav-link active" href="{{ route('customers.appointment.history') }}">Mes rendez-vous</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="{{ route('customers.appointment.type.view') }}">Prendre Rendez-vous</a>

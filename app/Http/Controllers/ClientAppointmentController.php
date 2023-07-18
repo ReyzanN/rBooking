@@ -152,4 +152,17 @@ class ClientAppointmentController extends Controller
         }
         return redirect()->back();
     }
+
+    public function ViewHistoryAccount(){
+        $RegistrationOfDay = auth()->user()->GetAppointmentRegistrationOfDay();
+        $PendingRegistration = auth()->user()->GetPendingConfirmationAppointment();
+        $CanceledRegistration = auth()->user()->GetCanceledAppointment();
+        $AllRegistration = auth()->user()->GetRegistration();
+        return view('customers.appointment.ViewHistory', [
+            'RegistrationOfDay' => $RegistrationOfDay,
+            'PendingRegistration' => $PendingRegistration,
+            'CanceledRegistration' => $CanceledRegistration,
+            'AllRegistration' => $AllRegistration
+            ]);
+    }
 }

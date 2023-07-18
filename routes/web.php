@@ -68,6 +68,7 @@ Route::middleware(['auth','KillSession'])->group(function (){
     Route::get('/app/customers/appointment/register/{IdAppointment}', [ClientAppointmentController::class, 'RegisterForAppointment'])->name('customers.appointment.register');
     Route::get('/app/customers/appointment/my/view/{IdRegistration}', [ClientAppointmentController::class,'ViewMyAppointment'])->name('customers.appointment.my.view');
     Route::get('/app/customers/appointment/cancel/{IdRegistration}', [ClientAppointmentController::class, 'CancelAppointment'])->name('customers.appointment.cancel');
+    Route::get('/app/customers/appointment/history', [ClientAppointmentController::class, 'ViewHistoryAccount'])->name('customers.appointment.history');
 
     /*
      * Administration Route
