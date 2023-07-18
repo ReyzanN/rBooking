@@ -130,7 +130,7 @@ class AppointmentsAdministrationController extends Controller
 
     public function UpdateStatusRegistration($IdRegistration,$Value){
         $Registration = AppointmentRegistration::find($IdRegistration);
-        if (!$Registration){
+        if (!$Registration || !$Registration->GetAppointment()->active){
             Session::flash('Failure', 'Ce rendez-vous n\'existe pas');
             return redirect()->back();
         }
