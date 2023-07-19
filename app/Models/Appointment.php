@@ -55,6 +55,11 @@ class Appointment extends Model
         return $this->hasMany(AppointmentRegistration::class,'idAppointment','id')->where('status', '<>','3')->get();
     }
 
+    public function GetPendingRegistrationForAppointment(): \Illuminate\Database\Eloquent\Collection
+    {
+         return $this->hasMany(AppointmentRegistration::class,'idAppointment','id')->where(['status' => 1])->get();
+    }
+
 
     /*
      * Functions

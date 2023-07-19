@@ -68,6 +68,11 @@ class AppointmentType extends Model
         return $this->hasMany(Appointment::class, 'idAppointmentType','id')->where(['active' => 1])->where(DB::raw('date'),'>', DB::raw('NOW()'))->where(['complete' => 0])->get();
     }
 
+    public function GetAppointmentNeedUpdate(): \Illuminate\Database\Eloquent\Collection
+    {
+        return $this->hasMany(Appointment::class, 'idAppointmentType','id')->where(['active' => 1])->get();
+    }
+
     /*
      * Functions
      */

@@ -29,8 +29,9 @@ class ClientAppointmentController extends Controller
             return redirect()->back();
         }
         $Appointment = $AppointmentType->GetActiveAppointmentForBooking();
-        foreach ($Appointment as $A){
-            $Registration = $A->GetAppointmentRegistration();
+        $AppointmentToUpdate = $AppointmentType->GetAppointmentNeedUpdate();
+        foreach ($AppointmentToUpdate as $A){
+            $Registration = $A->GetPendingRegistrationForAppointment();
             foreach ($Registration as $R){
                 $R->UpdateValidity();
             }
