@@ -51,6 +51,10 @@
                         <li class="list-group-item"><span class="badge text-bg-warning">Rendez-vous archivé</span></li>
                         <li class="list-group-item">Présence : @if($Registration->present) <span class="badge rounded-pill text-bg-success">Oui</span> @else <span class="badge rounded-pill text-bg-warning">Non</span> @endif</li>
                     @endif
+                    <li class="list-group-item">Rendez-vous pris le : {{ $Registration->ParseDateToString($Registration->created_at) }}</li>
+                    @if($Registration->confirmed)
+                        <li class="list-group-item">Confirmé le : {{ $Registration->ParseDateToString($Registration->confirmed_at) }}</li>
+                    @endif
                 </ul>
             </div>
             <h4 class="bg-body-tertiary rounded-3 mt-2 mb-2"><i class="bi bi-hand-index-thumb"></i>&nbsp;Vos Actions</h4>

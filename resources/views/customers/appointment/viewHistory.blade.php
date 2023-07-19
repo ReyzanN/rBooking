@@ -65,7 +65,7 @@
                                             <div class="col">
                                                 <div class="card shadow-sm">
                                                     <div class="card-img-top d-flex justify-content-center align-items-center">
-                                                        <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-warning">Confirmation en attente</span></p>
+                                                        <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-warning">En attente</span></p>
                                                     </div>
                                                     <div class="card-body">
                                                         <p class="text-center"><i class="bi bi-clock"></i>&nbsp;{{ $Registration->ParseDateToString($Registration->GetAppointment()->date) }}</p>
@@ -139,7 +139,7 @@
                                                     <div class="card-img-top d-flex justify-content-center align-items-center">
                                                         @switch($Registration->status)
                                                             @case(1)
-                                                                <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-warning">Confirmation en attente</span></p>
+                                                                <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-warning">En attente</span></p>
                                                                 @break
                                                             @case(2)
                                                                 <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-success">Actif</span></p>

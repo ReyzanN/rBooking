@@ -55,6 +55,7 @@
                                         <div class="mt-2 mb-2 d-flex justify-content-center align-items-center">
                                             <a href="{{ route('customers.appointment.my.view', $Registration) }}"><button class="btn btn-outline-primary"><i class="bi bi-eye"></i>&nbsp;Voir</button></a>
                                         </div>
+                                        <small class="text-body-secondary">Rendez-vous pris le {{ $Registration->ParseDateToString($Registration->created_at) }}</small>
                                     </div>
                                 </div>
                             </div>
