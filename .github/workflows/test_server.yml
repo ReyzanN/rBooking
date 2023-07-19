@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - oui
+      - test_server
 name: Auto-Prod Deploy
 jobs:
   deploy_job:
