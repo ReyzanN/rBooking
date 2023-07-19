@@ -158,7 +158,7 @@ class ClientAppointmentController extends Controller
         $PendingRegistration = auth()->user()->GetPendingConfirmationAppointment();
         $CanceledRegistration = auth()->user()->GetCanceledAppointment();
         $AllRegistration = auth()->user()->GetRegistration();
-        return view('customers.appointment.ViewHistory', [
+        return view('customers.appointment.viewHistory', [
             'RegistrationOfDay' => $RegistrationOfDay,
             'PendingRegistration' => $PendingRegistration,
             'CanceledRegistration' => $CanceledRegistration,
