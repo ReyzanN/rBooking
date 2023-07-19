@@ -29,7 +29,7 @@
                                             <div class="col">
                                                 <div class="card shadow-sm">
                                                     <div class="card-img-top d-flex justify-content-center align-items-center">
-                                                        <i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }}
+                                                        <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-success">Actif</span></p>
                                                     </div>
                                                     <div class="card-body">
                                                         <p class="text-center"><i class="bi bi-clock"></i>&nbsp;{{ $Registration->ParseDateToString($Registration->GetAppointment()->date) }}</p>
@@ -65,7 +65,7 @@
                                             <div class="col">
                                                 <div class="card shadow-sm">
                                                     <div class="card-img-top d-flex justify-content-center align-items-center">
-                                                        <i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }}
+                                                        <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-warning">Confirmation en attente</span></p>
                                                     </div>
                                                     <div class="card-body">
                                                         <p class="text-center"><i class="bi bi-clock"></i>&nbsp;{{ $Registration->ParseDateToString($Registration->GetAppointment()->date) }}</p>
@@ -101,7 +101,7 @@
                                             <div class="col">
                                                 <div class="card shadow-sm">
                                                     <div class="card-img-top d-flex justify-content-center align-items-center">
-                                                        <i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }}
+                                                        <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-danger">Annulé</span></p>
                                                     </div>
                                                     <div class="card-body">
                                                         <p class="text-center"><i class="bi bi-clock"></i>&nbsp;{{ $Registration->ParseDateToString($Registration->GetAppointment()->date) }}</p>
@@ -137,7 +137,17 @@
                                             <div class="col">
                                                 <div class="card shadow-sm">
                                                     <div class="card-img-top d-flex justify-content-center align-items-center">
-                                                        <i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }}
+                                                        @switch($Registration->status)
+                                                            @case(1)
+                                                                <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-warning">Confirmation en attente</span></p>
+                                                                @break
+                                                            @case(2)
+                                                                <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-success">Actif</span></p>
+                                                                @break
+                                                            @case(3)
+                                                                <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-danger">Annulé</span></p>
+                                                                @break
+                                                        @endswitch
                                                     </div>
                                                     <div class="card-body">
                                                         <p class="text-center"><i class="bi bi-clock"></i>&nbsp;{{ $Registration->ParseDateToString($Registration->GetAppointment()->date) }}</p>
