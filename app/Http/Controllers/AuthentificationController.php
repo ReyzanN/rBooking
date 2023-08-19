@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegistrationRequest;
+use App\Mail\ConfirmAccountMail;
+use App\Mail\ConfirmationForceRegistrationMail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class AuthentificationController extends Controller
@@ -22,22 +25,39 @@ class AuthentificationController extends Controller
             $UserInfo = $request->only('name','surname','email','phone');
             $UserPass = $request->only('password');
             try {
-                User::create([
+                $User = User::create([
                     'name' => $UserInfo['name'],
                     'surname' => $UserInfo['surname'],
                     'email' => $UserInfo['email'],
                     'password' => bcrypt($UserPass['password']),
                     'phone' => $UserInfo['phone'],
                     'rank' => 0,
-                    'accountValidity' => 1,
+                    'accountValidity' => 0,
+                    'confirmToken' => (new \App\Models\User)->GetTokenForAccount(20)
                 ]);
-                Session::flash('Success', 'Création de compte réussie');
+                Mail::to($User)->send(new ConfirmAccountMail($User));
+                Session::flash('Success', 'Création de compte réussie, merci de suivre les instructions reçus par mail');
                 return redirect()->route('auth.login');
             }catch (\Exception $e){
+                dd($e);
                 Session::flash('Failure', 'Une erreur s\'est produite, merci de réessayer');
             }
         }
         return redirect()->back();
+    }
+
+    public function ConfirmAccount($Token){
+        $User = User::where(['confirmToken' => $Token])->first();
+        if ($User){
+            if ($User->validate()){
+                Session::flash('Success','Compte validé');
+                return redirect()->route('auth.login');
+            }else{
+                Session::flash('Failure', 'Une erreur est survenue');
+                return redirect()->route('auth.login');
+            }
+        }
+        return redirect()->route('auth.login');
     }
 
     public function Login(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application

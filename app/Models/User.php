@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
+use Mockery\Exception;
 
 class User extends Authenticatable
 {
@@ -30,6 +31,7 @@ class User extends Authenticatable
         'accountVerifiedAt',
         'lastConnection',
         'killSession',
+        'confirmToken'
     ];
 
     /**
@@ -188,5 +190,19 @@ class User extends Authenticatable
 
     public function KillSession(){
         $this->update(['killSession' => 0]);
+    }
+
+    public function validate(){
+        try {
+            $this->update([
+                'accountVerifiedAt' => now(),
+                'accountValidity' => 1,
+                'confirmToken' => null
+            ]);
+            return true;
+        }catch (Exception $e){
+            dd($e);
+            return false;
+        }
     }
 }

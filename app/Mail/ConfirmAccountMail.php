@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -16,7 +17,7 @@ class ConfirmAccountMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(protected User $User)
     {
         //
     }
@@ -27,7 +28,7 @@ class ConfirmAccountMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Confirm Account Mail',
+            subject: 'Confirmation de compte',
         );
     }
 
@@ -37,7 +38,10 @@ class ConfirmAccountMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.auth.confirm',
+            with: [
+                'User' => $this->User
+            ]
         );
     }
 

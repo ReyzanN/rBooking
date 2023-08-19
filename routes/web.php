@@ -34,6 +34,7 @@ Route::get('/app/register', AuthentificationController::class)->name('auth.regis
 Route::post('/app/register', [AuthentificationController::class, 'Register'])->name('auth.register.confirm');
 Route::get('/app/login', [AuthentificationController::class, 'Login'])->name('auth.login');
 Route::post('/app/login', [AuthentificationController::class, 'LoginAttempt'])->name('auth.login.confirm');
+Route::get('/app/account/confirm/{Token}', [AuthentificationController::class, 'ConfirmAccount'])->name('auth.confirmAccount');
 
 /*
  * Appointment Confirmation
