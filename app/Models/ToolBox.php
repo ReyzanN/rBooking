@@ -57,6 +57,20 @@ trait ToolBox
         if ($Check) {
             $this->GetToken($Length);
         }
-        return Str::random($Length);
+        return $Token;
+    }
+
+    /**
+     * @usage : Get Token to confirm account
+     * @param int $Lenght
+     * @return string
+     */
+    public function GetTokenForAccount(int $Lenght): string {
+        $Token = Str::random($Lenght);
+        $Check = $this->where(['confirmToken' => $Token])->get()->first();
+        if ($Check) {
+            return $this->GetTokenForAccount($Lenght);
+        }
+        return $Token;
     }
 }
