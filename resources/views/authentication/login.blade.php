@@ -30,6 +30,10 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <a href="{{ route('password.redeem') }}"><p class="text-center">J'ai oublié mon mot de passe</p></a>
+                    </div>
+
                     <div class="row mt-2">
                         <div class="d-flex justify-content-center align-items-center">
                             <button class="btn btn-success" type="submit"><i class="bi bi-check2-all"></i>&nbsp;Me Connecter</button>

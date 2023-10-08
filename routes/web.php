@@ -28,6 +28,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',GuestController::class)->name('app.guest');
 
 /*
+ * Reset Password
+ */
+Route::get('/forgetmypassword', [\App\Http\Controllers\PasswordRecoveriesController::class, 'RedeemPassword'])->name('password.redeem');
+Route::post('/forgetmypassword', [\App\Http\Controllers\PasswordRecoveriesController::class, 'RedeemPasswordConfirm'])->name('password.redeemConfirm');
+Route::get('/setmynewpassword/{Token}', [\App\Http\Controllers\PasswordRecoveriesController::class, 'RedeemPasswordForToken'])->name('password.setnew');
+Route::post('/setmynewpassword/', [\App\Http\Controllers\PasswordRecoveriesController::class, 'RedeemPasswordForTokenConfirm'])->name('password.setnewConfirm');
+
+/*
  * Authentification
 */
 Route::get('/app/register', AuthentificationController::class)->name('auth.register');
