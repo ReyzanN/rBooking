@@ -39,8 +39,11 @@ class AuthentificationController extends Controller
                 Session::flash('Success', 'Création de compte réussie, merci de suivre les instructions reçus par mail');
                 return redirect()->route('auth.login');
             }catch (\Exception $e){
-                dd($e);
-                Session::flash('Failure', 'Une erreur s\'est produite, merci de réessayer');
+                if ($e->getCode() === "23000"){
+                    Session::flash('Failure', 'Cet email est déjà utilisé');
+                }else {
+                    Session::flash('Failure', 'Une erreur est survenue');
+                }
             }
         }
         return redirect()->back();
