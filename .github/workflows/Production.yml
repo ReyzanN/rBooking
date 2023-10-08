@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - test_server
+      - Production
 name: Auto-Prod Deploy
 jobs:
   deploy_job:
@@ -13,10 +13,10 @@ jobs:
       - name: Deploy file
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          username: ${{ secrets.APP_USERNAME }}
-          server: ${{ secrets.APP_SERVER }}
-          port: ${{ secrets.APP_PORT }}
+          username: ${{ secrets.APP_PROD_USERNAME }}
+          server: ${{ secrets.APP_PROD_SERVER }}
+          port: ${{ secrets.APP_PROD_PORT }}
           local_path: './*'
-          remote_path: '/'
+          remote_path: '/var/www/inscriptions'
           sftp_only: true
-          password: ${{ secrets.APP_PASSWORD }}
+          password: ${{ secrets.APP_PROD_PASSWORD }}
