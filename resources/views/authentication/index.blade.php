@@ -46,9 +46,9 @@
 
                     <div class="row mt-2">
                         <div class="col-12">
-                            <div class="form-floating mb-3">
-                                <input type="password" name="password" class="form-control" id="password" placeholder="MonSuperMotDePasse">
-                                <label for="password">Mot De Passe</label>
+                            <div class="input-group mb-3">
+                                <input type="password" name="password" class="form-control" id="password" placeholder="Mot de passe" aria-describedby="eyes">
+                                <span class="input-group-text" id="eyes" onclick="handleClick()"><i class="bi bi-eye"></i></span>
                             </div>
                         </div>
                     </div>
@@ -66,4 +66,20 @@
             <a href="{{ route('auth.login') }}">J'ai déjà un compte</a>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        const field = document.getElementById('password')
+        const icon = document.getElementById('eyes')
+        function handleClick(){
+            if (field.type === "password"){
+                field.type = "text"
+                icon.innerHTML = "<i class='bi bi-eye-slash'></i>"
+            }else{
+                field.type = "password"
+                icon.innerHTML = "<i class='bi bi-eye'></i>"
+            }
+        }
+    </script>
 @endsection
