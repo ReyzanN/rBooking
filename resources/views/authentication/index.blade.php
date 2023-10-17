@@ -53,6 +53,10 @@
                         </div>
                     </div>
 
+                    <div class="progress d-none" role="progressbar" aria-label="Success example" aria-valuenow="0" aria-valuemin="12" aria-valuemax="120" id="ProgressPassword">
+                        <div class="progress-bar bg-success" style="width: 0" id="ProgressBarChild"></div>
+                    </div>
+
                     <div class="row mt-2">
                         <div class="d-flex justify-content-center align-items-center">
                             <button class="btn btn-success" type="submit"><i class="bi bi-check2-all"></i>&nbsp;Créer Mon Compte</button>
@@ -81,5 +85,19 @@
                 icon.innerHTML = "<i class='bi bi-eye'></i>"
             }
         }
+
+        const ProgressBar = document.getElementById('ProgressPassword');
+        const ProgressBarChild = document.getElementById('ProgressBarChild');
+        field.addEventListener('focus', function(){
+            ProgressBar.classList.remove('d-none');
+        })
+        field.addEventListener('blur', function(){
+            ProgressBar.classList.add('d-none');
+        })
+        let Count = 0
+        field.addEventListener('keyup', function(){
+            ProgressBar.setAttribute('aria-valuenow', field.value.length)
+            ProgressBarChild.style.width = field.value.length*8.5+'%'
+        })
     </script>
 @endsection

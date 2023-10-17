@@ -16,16 +16,13 @@
                     @csrf
 
                     <div class="row mt-2">
-                        <div class="col-6">
-                            <div class="form-floating mb-3">
-                                <input type="email" name="email" class="form-control" id="email" placeholder="jean.martin@gmail.com" value="{{ request()->old('email') }}">
-                                <label for="email">Adresse Email</label>
-                            </div>
+                        <div class="col-6 mt-2">
+                            <input type="email" name="email" class="form-control" id="email" placeholder="jean.martin@gmail.com" value="{{ request()->old('email') }}">
                         </div>
-                        <div class="col-6">
-                            <div class="form-floating mb-3">
-                                <input type="password" name="password" class="form-control" id="password" placeholder="MonSuperMotDePasse">
-                                <label for="password">Mot De Passe</label>
+                        <div class="col-6 row mt-2">
+                            <div class="input-group">
+                                <input type="password" name="password" class="form-control" id="password" placeholder="Mot de passe" aria-describedby="eyes">
+                                <span class="input-group-text" id="eyes" onclick="handleClick()"><i class="bi bi-eye"></i></span>
                             </div>
                         </div>
                     </div>
@@ -43,4 +40,20 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        const field = document.getElementById('password')
+        const icon = document.getElementById('eyes')
+        function handleClick(){
+            if (field.type === "password"){
+                field.type = "text"
+                icon.innerHTML = "<i class='bi bi-eye-slash'></i>"
+            }else{
+                field.type = "password"
+                icon.innerHTML = "<i class='bi bi-eye'></i>"
+            }
+        }
+    </script>
 @endsection
