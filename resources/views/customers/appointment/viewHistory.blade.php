@@ -90,7 +90,7 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Rendez-vous annulé
+                                Rendez-vous annulés
                             </button>
                         </h2>
                         <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#HistoryAccordion">
@@ -126,7 +126,7 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                Tout mes rendez-vous
+                                Tous mes rendez-vous
                             </button>
                         </h2>
                         <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#HistoryAccordion">

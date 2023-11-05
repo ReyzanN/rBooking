@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Mockery\Exception;
 
 class AdministrationController extends Controller
 {
@@ -114,8 +115,12 @@ class AdministrationController extends Controller
                 return redirect()->back();
             }
             try {
-                Mail::to($User->email)->send(new DeleteAccountMail());
                 $User->delete();
+                try{
+                    Mail::to($User->email)->send(new DeleteAccountMail());
+                }catch (Exception $e){
+                    // Silence
+                }
                 Session::flash('Success','Le compte à été supprimé');
             }catch (\Exception $e){
                 Session::flash('Failure','Une erreur est survenue');
