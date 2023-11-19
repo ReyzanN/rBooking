@@ -18,27 +18,6 @@
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col">
-                    <div class="row mt-3">
-                        <div class="mt-1 mb-3">
-                            <input type="hidden" name="mapCoords" id="mapCoords" value="{{ $AppointmentType->jsonCoordinatesInformations }}">
-                            <div class="row">
-                                <div id="map" class="rounded-3"></div>
-                            </div>
-                        </div>
-                        <h5 class="bg-body-tertiary rounded-3 text-center"><i class="bi bi-info-circle"></i>&nbsp;Informations</h5>
-                        <div class="mt-2">
-                            <div class="alert alert-light" role="alert">
-                                {{ $AppointmentType->description }}
-                            </div>
-                            <div class="mt-2">
-                                <p><i class="bi bi-geo-alt"></i>&nbsp;Adresse : {{ $AppointmentType->streetNumber }} {{ $AppointmentType->street }} / {{ $AppointmentType->zipCode }} {{ $AppointmentType->location }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-2">
                 <div class="row mt-3">
                     <h5 class="bg-body-tertiary rounded-3 text-center"><i class="bi bi-calendar-check"></i>&nbsp;Liste des rendez-vous disponibles</h5>
                 </div>
@@ -71,6 +50,27 @@
                             </div>
                         </div>
                     @endif
+                </div>
+                <div class="row mt-2">
+                    <div class="col">
+                        <div class="row mt-3">
+                            <h5 class="bg-body-tertiary rounded-3 text-center"><i class="bi bi-info-circle"></i>&nbsp;Informations</h5>
+                            <div class="mt-1 mb-3">
+                                <input type="hidden" name="mapCoords" id="mapCoords" value="{{ $AppointmentType->jsonCoordinatesInformations }}">
+                                <div class="row">
+                                    <div id="map" class="rounded-3"></div>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <div class="alert alert-light" role="alert">
+                                    {{ $AppointmentType->description }}
+                                </div>
+                                <div class="mt-2">
+                                    <p><i class="bi bi-geo-alt"></i>&nbsp;Adresse : {{ $AppointmentType->streetNumber }} {{ $AppointmentType->street }} / {{ $AppointmentType->zipCode }} {{ $AppointmentType->location }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

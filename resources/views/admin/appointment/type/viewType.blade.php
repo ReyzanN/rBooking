@@ -31,25 +31,6 @@
             </div>
         </div>
         <div class="row mt-2">
-            <div class="col">
-                <input type="hidden" name="mapCoords" id="mapCoords" value="{{ $AppointmentType->jsonCoordinatesInformations }}">
-                <div class="row">
-                    <div id="map" class="rounded-3"></div>
-                </div>
-                <div class="row mt-3">
-                    <h5 class="bg-body-tertiary rounded-3 text-center"><i class="bi bi-info-circle"></i>&nbsp;Informations</h5>
-                    <div class="mt-2">
-                        <div class="alert alert-light" role="alert">
-                            {{ $AppointmentType->description }}
-                        </div>
-                        <div class="mt-2">
-                            <p><i class="bi bi-geo-alt"></i>&nbsp;Adresse : {{ $AppointmentType->streetNumber }} {{ $AppointmentType->street }} / {{ $AppointmentType->zipCode }} {{ $AppointmentType->location }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-2">
             <div class="row mt-3">
                 <h5 class="bg-body-tertiary rounded-3 text-center"><i class="bi bi-calendar-check"></i>&nbsp;Liste des rendez-vous disponibles</h5>
             </div>
@@ -109,28 +90,51 @@
             </div>
             <div class="col">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    @foreach($AppointmentType->GetInActiveAppointment() as $Appointment)
-                        <div class="col">
-                            <div class="card shadow-sm">
-                                <div class="card-img-top d-flex justify-content-center align-items-center">
-                                    <i class="bi bi-calendar-check" style="font-size: 2rem"></i>&nbsp;<span class="badge rounded-pill text-bg-secondary">Archivé</span>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text"><i class="bi bi-calendar2-week"></i>&nbsp; Rendez-vous le : <b>{{ $Appointment->ParseDateForAppointment($Appointment->date) }}</b></p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <a href="{{ route('admin.appointment.view', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button></a>
-                                            <a href="{{ route('admin.appointment.remove', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button></a>
+                    @if(count($AppointmentType->GetInActiveAppointment()) > 0)
+                        @foreach($AppointmentType->GetInActiveAppointment() as $Appointment)
+                            <div class="col">
+                                <div class="card shadow-sm">
+                                    <div class="card-img-top d-flex justify-content-center align-items-center">
+                                        <i class="bi bi-calendar-check" style="font-size: 2rem"></i>&nbsp;<span class="badge rounded-pill text-bg-secondary">Archivé</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text"><i class="bi bi-calendar2-week"></i>&nbsp; Rendez-vous le : <b>{{ $Appointment->ParseDateForAppointment($Appointment->date) }}</b></p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                                <a href="{{ route('admin.appointment.view', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button></a>
+                                                <a href="{{ route('admin.appointment.remove', $Appointment->id) }}"><button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button></a>
+                                            </div>
+                                            <small class="text-body-secondary">Place disponibles : {{ $Appointment->GetRemainingPlace() }} / {{ $Appointment->place }}</small>
                                         </div>
-                                        <small class="text-body-secondary">Place disponibles : {{ $Appointment->GetRemainingPlace() }} / {{ $Appointment->place }}</small>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>
+
+        <div class="row mt-2">
+            <div class="col">
+                <h5 class="bg-body-tertiary rounded-3 text-center"><i class="bi bi-info-circle"></i>&nbsp;Informations</h5>
+                <input type="hidden" name="mapCoords" id="mapCoords" value="{{ $AppointmentType->jsonCoordinatesInformations }}">
+                <div class="row">
+                    <div id="map" class="rounded-3"></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="mt-2">
+                        <div class="alert alert-light" role="alert">
+                            {{ $AppointmentType->description }}
+                        </div>
+                        <div class="mt-2">
+                            <p><i class="bi bi-geo-alt"></i>&nbsp;Adresse : {{ $AppointmentType->streetNumber }} {{ $AppointmentType->street }} / {{ $AppointmentType->zipCode }} {{ $AppointmentType->location }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Modal Update Type -->
