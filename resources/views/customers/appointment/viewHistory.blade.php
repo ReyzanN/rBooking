@@ -17,11 +17,57 @@
                 <div class="accordion" id="HistoryAccordion">
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                Tous mes rendez-vous
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#HistoryAccordion">
+                            <div class="accordion-body">
+                                @if(count($AllRegistration) > 0)
+                                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                                        @foreach($AllRegistration as $Registration)
+                                            <div class="col">
+                                                <div class="card shadow-sm">
+                                                    <div class="card-img-top d-flex justify-content-center align-items-center">
+                                                        @switch($Registration->status)
+                                                            @case(1)
+                                                                <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-warning">En attente</span></p>
+                                                                @break
+                                                            @case(2)
+                                                                <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-success">Actif</span></p>
+                                                                @break
+                                                            @case(3)
+                                                                <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-danger">Annulé</span></p>
+                                                                @break
+                                                        @endswitch
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <p class="text-center"><i class="bi bi-clock"></i>&nbsp;{{ $Registration->ParseDateToString($Registration->GetAppointment()->date) }}</p>
+                                                        <div class="mt-2 mb-2 d-flex justify-content-center align-items-center">
+                                                            <a href="{{ route('customers.appointment.my.view', $Registration) }}"><button class="btn btn-outline-primary"><i class="bi bi-eye"></i>&nbsp;Voir</button></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @else
+                                    <div class="col d-flex justify-content-center mt-3">
+                                        <div class="alert alert-light" role="alert">
+                                            Aucun Historique
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 Rendez-vous du jour
                             </button>
                         </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#HistoryAccordion">
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#HistoryAccordion">
                             <div class="accordion-body">
                                 @if(count($RegistrationOfDay) > 0)
                                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -102,52 +148,6 @@
                                                 <div class="card shadow-sm">
                                                     <div class="card-img-top d-flex justify-content-center align-items-center">
                                                         <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-danger">Annulé</span></p>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <p class="text-center"><i class="bi bi-clock"></i>&nbsp;{{ $Registration->ParseDateToString($Registration->GetAppointment()->date) }}</p>
-                                                        <div class="mt-2 mb-2 d-flex justify-content-center align-items-center">
-                                                            <a href="{{ route('customers.appointment.my.view', $Registration) }}"><button class="btn btn-outline-primary"><i class="bi bi-eye"></i>&nbsp;Voir</button></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                @else
-                                    <div class="col d-flex justify-content-center mt-3">
-                                        <div class="alert alert-light" role="alert">
-                                            Aucun Historique
-                                        </div>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                Tous mes rendez-vous
-                            </button>
-                        </h2>
-                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#HistoryAccordion">
-                            <div class="accordion-body">
-                                @if(count($AllRegistration) > 0)
-                                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                                        @foreach($AllRegistration as $Registration)
-                                            <div class="col">
-                                                <div class="card shadow-sm">
-                                                    <div class="card-img-top d-flex justify-content-center align-items-center">
-                                                        @switch($Registration->status)
-                                                            @case(1)
-                                                                <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-warning">En attente</span></p>
-                                                                @break
-                                                            @case(2)
-                                                                <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-success">Actif</span></p>
-                                                                @break
-                                                            @case(3)
-                                                                <p><i class="bi bi-info" style="font-size: 2rem"></i>&nbsp;{{ $Registration->GetAppointment()->GetAppointmentType()->name }} - <span class="badge rounded-pill text-bg-danger">Annulé</span></p>
-                                                                @break
-                                                        @endswitch
                                                     </div>
                                                     <div class="card-body">
                                                         <p class="text-center"><i class="bi bi-clock"></i>&nbsp;{{ $Registration->ParseDateToString($Registration->GetAppointment()->date) }}</p>
