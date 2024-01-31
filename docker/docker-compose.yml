@@ -1,0 +1,45 @@
+version: '3'
+name:  ${PROJECT_NAME}
+services:
+  rBooking-php:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - 9000:9000
+    volumes:
+      - ../web:/var/www/rBooking
+    depends_on:
+      - rBooking-database
+    links:
+      - rBooking-database
+    restart: always
+  rBooking-nginx:
+    image: nginx:stable-alpine
+    ports:
+      - 80:80
+    volumes:
+      - ../web:/var/www/rBooking
+      - ./config/nginx/:/etc/nginx/conf.d/
+    depends_on:
+      - rBooking-php
+  rBooking-pma:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - ${IP}:8000:80
+    links:
+      - rBooking-database:rBooking-database
+    environment:
+      - PMA_ARBITRARY=0
+      - PMA_HOST=rBooking-database
+      - PMA_USER=admin
+      - PMA_PASSWORD=admin
+  rBooking-database:
+    image: mariadb:latest
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: sandbox
+      MARIADB_USER: admin
+      MARIADB_PASSWORD: admin
+    ports:
+      - ${IP}:3306:3306
