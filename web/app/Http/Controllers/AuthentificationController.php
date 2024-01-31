@@ -19,7 +19,7 @@ class AuthentificationController extends Controller
         return view('authentication.index');
     }
 
-    public function Register(RegistrationRequest $request): \Illuminate\Http\RedirectResponse
+    public function Register(RegistrationRequest $request): \Illuminate\Http\RedirectResponse|\Illuminate\View\View
     {
         if ($request->validated()){
             $UserInfo = $request->only('name','surname','email','phone');
@@ -37,7 +37,7 @@ class AuthentificationController extends Controller
                 ]);
                 Mail::to($User)->send(new ConfirmAccountMail($User));
                 Session::flash('Success', 'Création de compte réussie, merci de suivre les instructions reçus par mail');
-                return redirect()->route('auth.login');
+                return view('authentication.landing');
             }catch (\Exception $e){
                 if ($e->getCode() === "23000"){
                     Session::flash('Failure', 'Cet email est déjà utilisé');
